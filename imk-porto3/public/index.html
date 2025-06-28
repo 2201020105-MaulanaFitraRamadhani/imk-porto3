@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portofolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="main.js" type="module"></script>
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+    const supabase = createClient('https://your-project-id.supabase.co', 'your-anon-key');
+
+    const session = await supabase.auth.getSession();
+    const navList = document.querySelector('nav ul');
+    const loginItem = navList.querySelector('li:last-child');
+
+    if (session.data.session) {
+      loginItem.innerHTML = '<a href="#" id="logout-link">Logout</a>';
+      document.getElementById('logout-link').addEventListener('click', async () => {
+        await supabase.auth.signOut();
+        window.location.reload();
+      });
+    } else {
+      loginItem.innerHTML = '<a href="login.html">Login</a>';
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Portofolio Pribadi</h1>
+    <nav>
+      <ul>
+        <li><a href="#biodata">Biodata</a></li>
+        <li><a href="#skills">Skill</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#organization">Organisasi</a></li>
+        <li><a href="#activity">Activity</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#projects">Project</a></li>
+        <li><a href="#articles">Articles</a></li>
+        <li><a href="#contact">Contact Me</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="biodata"></section>
+    <section id="skills"></section>
+    <section id="experience"></section>
+    <section id="organization"></section>
+    <section id="activity"></section>
+    <section id="education"></section>
+    <section id="projects"></section>
+    <section id="articles"></section>
+    <section id="contact"></section>
+  </main>
+</body>
+</html>

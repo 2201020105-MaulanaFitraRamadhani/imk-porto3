@@ -1,0 +1,13 @@
+/portfolio-website/
+│
+├── public/
+│   ├── index.html        ← Halaman utama SPA
+│   ├── login.html        ← Halaman login
+│   ├── register.html     ← Halaman registrasi
+│   ├── input.html        ← Halaman input artikel (admin)
+│   ├── style.css         ← Gaya halaman
+│   └── main.js           ← Logika frontend
+│
+├── .env                  ← Konfigurasi Supabase (untuk pengembangan)
+├── vercel.json           ← Konfigurasi deployment Vercel
+└── README.md             ← Panduan instalasi dan deployment

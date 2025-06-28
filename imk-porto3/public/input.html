@@ -1,0 +1,23 @@
+<!-- public/input.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Input Artikel</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="input.js" type="module"></script>
+</head>
+<body>
+  <section>
+    <h2>Tambah Artikel Baru</h2>
+    <form id="article-form">
+      <input type="text" id="title" placeholder="Judul Artikel" required>
+      <textarea id="content" placeholder="Isi Artikel" required></textarea>
+      <input type="url" id="image_url" placeholder="URL Gambar (opsional)">
+      <button type="submit">Submit</button>
+    </form>
+    <button id="logout">Logout</button>
+  </section>
+</body>
+</html>
