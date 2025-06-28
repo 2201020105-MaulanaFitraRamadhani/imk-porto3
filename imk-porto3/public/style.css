@@ -1,56 +1,269 @@
-/* public/style.css */
+/* Reset dan Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #f4f4f4;
-    color: #333;
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  background-color: #f9fafb;
+  color: #1f2937;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #111827;
+  color: white;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: white;
+}
+
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  list-style: none;
+  margin-top: 0.5rem;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+nav ul li a:hover {
+  background-color: #374151;
+}
+
+/* Sections */
+.section {
+  margin-top: 3rem;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
+}
+
+.section h2 {
+  font-size: 1.75rem;
+  color: #111827;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 0.5rem;
+}
+
+.section p, .section ul {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.section ul li {
+  margin-left: 1.5rem;
+  list-style: disc;
+}
+
+/* Contact Form */
+form {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+form label {
+  font-weight: 600;
+}
+
+form textarea {
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-family: inherit;
+  resize: vertical;
+}
+
+form button {
+  align-self: start;
+  background-color: #111827;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+form button:hover {
+  background-color: #374151;
+}
+
+/* Articles list styling */
+#article-list {
+  margin-top: 1rem;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.article-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.article-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
+.article-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.article-card h3 {
+  font-size: 1.25rem;
+  margin: 0.75rem 1rem 0.5rem;
+  color: #1f2937;
+}
+
+.article-card p {
+  font-size: 0.95rem;
+  color: #4b5563;
+  margin: 0 1rem 1rem;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  nav {
-    background: #222;
-    color: white;
-    padding: 1em;
-    position: sticky;
-    top: 0;
-    z-index: 10;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
   nav ul {
-    list-style: none;
-    display: flex;
-    gap: 1em;
-    justify-content: center;
-    padding: 0;
-    margin: 0;
+    flex-direction: column;
+    gap: 0.5rem;
   }
-  nav a {
-    color: white;
-    text-decoration: none;
+  .navbar {
+    text-align: center;
   }
-  section {
-    padding: 2em;
-    background: white;
-    margin: 1em auto;
-    max-width: 800px;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  .container {
+    padding: 1rem;
   }
-  h1, h2 {
-    color: #0077cc;
+  .section {
+    padding: 1.25rem;
   }
-  form input, form textarea {
-    display: block;
-    width: 100%;
-    padding: 0.5em;
-    margin-bottom: 1em;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  .article-card img {
+    height: 140px;
   }
-  form button {
-    padding: 0.5em 1em;
-    background: #0077cc;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Landing page: Biodata dan Skill */
+.profile-intro {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.profile-intro img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.profile-intro .bio-text {
+  flex: 1;
+}
+
+.skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.skill-list span {
+  background-color: #e5e7eb;
+  color: #374151;
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.skill-list span:hover {
+  background-color: #d1d5db;
+}
+
+/* Timeline style for Experience, Education, etc */
+.timeline {
+  margin-top: 1rem;
+  padding-left: 1rem;
+  border-left: 3px solid #e5e7eb;
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -0.65rem;
+  top: 0.4rem;
+  width: 12px;
+  height: 12px;
+  background-color: #111827;
+  border-radius: 50%;
+}
+
+.timeline-item h4 {
+  font-size: 1rem;
+  color: #111827;
+  margin-bottom: 0.25rem;
+}
+
+.timeline-item p {
+  font-size: 0.9rem;
+  color: #4b5563;
+}

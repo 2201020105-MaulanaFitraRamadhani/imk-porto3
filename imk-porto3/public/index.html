@@ -3,17 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portofolio</title>
+  <title>Portofolio Pribadi</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <script defer src="main.js" type="module"></script>
   <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-    const supabase = createClient('https://lvobywbpmssawuukzskm.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2b2J5d2JwbXNzYXd1dWt6c2ttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTExMTc4MDAsImV4cCI6MjA2NjY5MzgwMH0.Uk4RXPnrQq5wagaBzfPGH3Tf5qexktRIbHs0ovfXWxE');
-
+    const supabase = createClient('https://your-project-id.supabase.co', 'your-anon-key');
     const session = await supabase.auth.getSession();
     const navList = document.querySelector('nav ul');
     const loginItem = navList.querySelector('li:last-child');
-
     if (session.data.session) {
       loginItem.innerHTML = '<a href="#" id="logout-link">Logout</a>';
       document.getElementById('logout-link').addEventListener('click', async () => {
@@ -26,34 +27,85 @@
   </script>
 </head>
 <body>
-  <header>
-    <h1>Portofolio Pribadi</h1>
-    <nav>
-      <ul>
-        <li><a href="#biodata">Biodata</a></li>
-        <li><a href="#skills">Skill</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#organization">Organisasi</a></li>
-        <li><a href="#activity">Activity</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#projects">Project</a></li>
-        <li><a href="#articles">Articles</a></li>
-        <li><a href="#contact">Contact Me</a></li>
-        <li><a href="login.html">Login</a></li>
-      </ul>
-    </nav>
+  <header class="navbar">
+    <div class="container">
+      <h1 class="logo">Portofolio</h1>
+      <nav>
+        <ul>
+          <li><a href="#biodata">Biodata</a></li>
+          <li><a href="#skills">Skill</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#organization">Organisasi</a></li>
+          <li><a href="#activity">Activity</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#projects">Project</a></li>
+          <li><a href="#articles">Articles</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <main>
-    <section id="biodata"></section>
-    <section id="skills"></section>
-    <section id="experience"></section>
-    <section id="organization"></section>
-    <section id="activity"></section>
-    <section id="education"></section>
-    <section id="projects"></section>
-    <section id="articles"></section>
-    <section id="contact"></section>
+  <main class="container">
+    <section id="biodata" class="section">
+      <h2>Biodata Singkat</h2>
+      <p>Halo! Saya [Nama Kamu], seorang [profesi] yang memiliki minat dalam [bidang].</p>
+    </section>
+
+    <section id="skills" class="section">
+      <h2>Skill Set</h2>
+      <ul>
+        <li>HTML, CSS, JavaScript</li>
+        <li>React / Vue / Svelte</li>
+        <li>Node.js, Supabase</li>
+      </ul>
+    </section>
+
+    <section id="experience" class="section">
+      <h2>Pengalaman</h2>
+      <p>Berpengalaman dalam mengembangkan aplikasi web dan melakukan deployment menggunakan Vercel dan Supabase.</p>
+    </section>
+
+    <section id="organization" class="section">
+      <h2>Organisasi</h2>
+      <p>Aktif di komunitas developer dan organisasi kampus seperti [contoh organisasi].</p>
+    </section>
+
+    <section id="activity" class="section">
+      <h2>Kegiatan</h2>
+      <p>Ikut serta dalam hackathon, kontribusi open-source, dan kegiatan mentoring.</p>
+    </section>
+
+    <section id="education" class="section">
+      <h2>Pendidikan</h2>
+      <p>Sarjana Teknik Informatika dari Universitas [Nama Universitas].</p>
+    </section>
+
+    <section id="projects" class="section">
+      <h2>Proyek</h2>
+      <ul>
+        <li>Sistem monitoring pH dan suhu berbasis web</li>
+        <li>Aplikasi klasifikasi bahasa isyarat</li>
+      </ul>
+    </section>
+
+    <section id="articles" class="section">
+      <h2>Artikel Terkait Proyek</h2>
+      <div id="article-list"></div>
+    </section>
+
+    <section id="contact" class="section">
+      <h2>Contact Me</h2>
+      <p>Email: kamu@email.com</p>
+      <p>Instagram: @kamu</p>
+      <p>Service Fee: Mulai dari Rp500.000 / proyek</p>
+      <form>
+        <label for="message">Pesan:</label>
+        <textarea id="message" rows="4"></textarea>
+        <button type="submit">Kirim</button>
+      </form>
+    </section>
   </main>
 </body>
 </html>
