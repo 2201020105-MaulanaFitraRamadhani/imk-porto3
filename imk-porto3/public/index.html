@@ -93,6 +93,25 @@
     <section id="articles" class="section">
       <h2>Artikel Terkait Proyek</h2>
       <div id="article-list"></div>
+      <script>
+        async function loadArticles() {
+          const { data: articles, error } = await supabase.from('articles').select('*');
+          const container = document.getElementById('article-list');
+          container.innerHTML = '';
+      
+          articles.forEach(article => {
+            container.innerHTML += `
+              <div class="article-card">
+                <img src="${article.image_url || 'https://via.placeholder.com/400x200'}" alt="Gambar Artikel" />
+                <h3>${article.title}</h3>
+                <p>${article.content}</p>
+              </div>
+            `;
+          });
+        }
+      
+        loadArticles();
+      </script>
     </section>
 
     <section id="contact" class="section">
