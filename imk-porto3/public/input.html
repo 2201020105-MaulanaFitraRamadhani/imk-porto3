@@ -1,29 +1,23 @@
+<!-- public/input.html -->
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Input Artikel</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
+  <script defer src="input.js" type="module"></script>
 </head>
 <body>
-  <div class="auth-container">
-    <h2>Tambah Artikel</h2>
+  <section>
+    <h2>Tambah Artikel Baru</h2>
     <form id="article-form">
-      <label for="title">Judul Artikel:</label>
-      <input type="text" id="title" required />
-
-      <label for="image-url">Link Gambar atau Upload:</label>
-      <input type="url" id="image-url" placeholder="https://..." />
-
-      <label for="content">Konten Artikel:</label>
-      <textarea id="content" rows="6" required></textarea>
-
-      <button type="submit">Simpan Artikel</button>
+      <input type="text" id="title" placeholder="Judul Artikel" required>
+      <textarea id="content" placeholder="Isi Artikel" required></textarea>
+      <input type="url" id="image_url" placeholder="URL Gambar (opsional)">
+      <button type="submit">Submit</button>
     </form>
-    <a href="index.html" class="back-home">← Kembali ke Beranda</a>
-  </div>
-
-  <script type="module" src="js/input.js"></script>
+    <button id="logout">Logout</button>
+  </section>
 </body>
 </html>
