@@ -119,12 +119,21 @@
       <p>Email: kamu@email.com</p>
       <p>Instagram: @kamu</p>
       <p>Service Fee: Mulai dari Rp500.000 / proyek</p>
-      <form>
-        <label for="message">Pesan:</label>
-        <textarea id="message" rows="4"></textarea>
+      <form id="contact-form">
+        <label for="name">Nama</label>
+        <input type="text" id="name" name="name" required>
+      
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      
+        <label for="message">Pesan</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+      
         <button type="submit">Kirim</button>
       </form>
+      
     </section>
+    <script type="module" src="./contact-submit.js"></script>
     <script type="module" src="./load-articles.js"></script>
 
   </main>
