@@ -70,11 +70,7 @@ document.getElementById('article-form').addEventListener('submit', async (e) => 
 // === Tampilkan Data dari Tabel Kontak ===
 async function loadContacts() {
   const tableBody = document.querySelector('#contact-table tbody');
-  
-let { data: contacts, error } = await supabase
-.from('contacts')
-.select('*')
-        
+  const { data, error } = await supabase.from('contacts').select('*').order('created_at', { ascending: false });
 
   if (error) {
     tableBody.innerHTML = `<tr><td colspan="4">Gagal memuat data</td></tr>`;
