@@ -3,1395 +3,176 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portfolio Pribadi</title>
+  <title>Portofolio Pribadi</title>
+  <link rel="stylesheet" href="style.css"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <style>
-    /* Reset dan Base */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
-      --primary-color: #0f172a;
-      --secondary-color: #1e293b;
-      --accent-color: #3b82f6;
-      --accent-hover: #2563eb;
-      --text-primary: #1e293b;
-      --text-secondary: #64748b;
-      --bg-primary: #ffffff;
-      --bg-secondary: #f8fafc;
-      --border-color: #e2e8f0;
-      --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-      --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      line-height: 1.6;
-      background: var(--bg-secondary);
-      color: var(--text-primary);
-      overflow-x: hidden;
-    }
-
-    /* Animated Background */
-    .bg-animation {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      opacity: 0.03;
-    }
-
-    .bg-animation::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: 
-        radial-gradient(circle at 25% 25%, #3b82f6 0%, transparent 50%),
-        radial-gradient(circle at 75% 75%, #8b5cf6 0%, transparent 50%),
-        radial-gradient(circle at 50% 50%, #06b6d4 0%, transparent 50%);
-      animation: float 20s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      33% { transform: translateY(-20px) rotate(1deg); }
-      66% { transform: translateY(10px) rotate(-1deg); }
-    }
-
-    /* Navbar */
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border-color);
-      z-index: 1000;
-      transition: all 0.3s ease;
-    }
-
-    .navbar.scrolled {
-      box-shadow: var(--shadow-lg);
-    }
-
-    .navbar .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 800;
-      background: var(--gradient-1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    nav ul {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-      align-items: center;
-    }
-
-    nav ul li a {
-      color: var(--text-primary);
-      text-decoration: none;
-      font-weight: 500;
-      padding: 0.5rem 1rem;
-      border-radius: 50px;
-      transition: all 0.3s ease;
-      position: relative;
-    }
-
-    nav ul li a::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 0;
-      height: 2px;
-      background: var(--accent-color);
-      transition: all 0.3s ease;
-      transform: translateX(-50%);
-    }
-
-    nav ul li a:hover::before {
-      width: 80%;
-    }
-
-    nav ul li a:hover {
-      color: var(--accent-color);
-      transform: translateY(-2px);
-    }
-
-    /* Mobile Menu */
-    .mobile-menu-btn {
-      display: none;
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: var(--text-primary);
-    }
-
-    /* Hero Section */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 2rem;
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
-      margin-top: 80px;
-    }
-
-    .hero-content {
-      max-width: 800px;
-      animation: fadeInUp 1s ease;
-    }
-
-    .profile-image {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      margin: 0 auto 2rem;
-      display: block;
-      border: 4px solid white;
-      box-shadow: var(--shadow-xl);
-      animation: profileFloat 3s ease-in-out infinite;
-    }
-
-    @keyframes profileFloat {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-    }
-
-    .hero h1 {
-      font-size: 3.5rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-      background: var(--gradient-1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero .subtitle {
-      font-size: 1.25rem;
-      color: var(--text-secondary);
-      margin-bottom: 2rem;
-      font-weight: 300;
-    }
-
-    .cta-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 0.75rem 2rem;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      border: none;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .btn-primary {
-      background: var(--gradient-1);
-      color: white;
-      box-shadow: var(--shadow-md);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: var(--text-primary);
-      border: 2px solid var(--border-color);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--accent-color);
-      color: var(--accent-color);
-      transform: translateY(-2px);
-    }
-
-    /* Container */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-
-    /* Sections */
-    .section {
-      margin: 6rem 0;
-      opacity: 0;
-      transform: translateY(50px);
-      transition: all 0.6s ease;
-    }
-
-    .section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 4rem;
-    }
-
-    .section-title {
-      font-size: 2.5rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-      background: var(--gradient-1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .section-subtitle {
-      font-size: 1.1rem;
-      color: var(--text-secondary);
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    /* Cards */
-    .card {
-      background: var(--bg-primary);
-      border-radius: 20px;
-      padding: 2rem;
-      box-shadow: var(--shadow-md);
-      transition: all 0.3s ease;
-      border: 1px solid var(--border-color);
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-xl);
-    }
-
-    /* Skills Grid */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-
-    .skill-category {
-      background: var(--bg-primary);
-      border-radius: 20px;
-      padding: 2rem;
-      box-shadow: var(--shadow-md);
-      transition: all 0.3s ease;
-    }
-
-    .skill-category:hover {
-      transform: translateY(-5px);
-    }
-
-    .skill-category h3 {
-      font-size: 1.25rem;
-      margin-bottom: 1rem;
-      color: var(--text-primary);
-    }
-
-    .skill-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .skill-tag {
-      background: var(--gradient-1);
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 50px;
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: all 0.3s ease;
-    }
-
-    .skill-tag:hover {
-      transform: scale(1.05);
-    }
-
-    /* Timeline */
-    .timeline {
-      position: relative;
-      padding-left: 2rem;
-    }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: var(--gradient-1);
-    }
-
-    .timeline-item {
-      position: relative;
-      margin-bottom: 2rem;
-      background: var(--bg-primary);
-      padding: 1.5rem;
-      border-radius: 15px;
-      box-shadow: var(--shadow-md);
-      transition: all 0.3s ease;
-    }
-
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -2.5rem;
-      top: 1.5rem;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--accent-color);
-      box-shadow: 0 0 0 4px var(--bg-primary);
-    }
-
-    .timeline-item:hover {
-      transform: translateX(10px);
-    }
-
-    .timeline-item h4 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: var(--text-primary);
-    }
-
-    .timeline-item .date {
-      color: var(--accent-color);
-      font-size: 0.875rem;
-      font-weight: 500;
-      margin-bottom: 0.5rem;
-    }
-
-    .timeline-item p {
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    /* Projects Grid */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-
-    .project-card {
-      background: var(--bg-primary);
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: var(--shadow-md);
-      transition: all 0.3s ease;
-    }
-
-    .project-card:hover {
-      transform: translateY(-10px);
-      box-shadow: var(--shadow-xl);
-    }
-
-    .project-image {
-      height: 200px;
-      background: var(--gradient-2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 2rem;
-    }
-
-    .project-content {
-      padding: 1.5rem;
-    }
-
-    .project-title {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-
-    .project-description {
-      color: var(--text-secondary);
-      margin-bottom: 1rem;
-      line-height: 1.6;
-    }
-
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .project-tag {
-      background: var(--bg-secondary);
-      color: var(--text-secondary);
-      padding: 0.25rem 0.75rem;
-      border-radius: 20px;
-      font-size: 0.75rem;
-    }
-
-    /* Articles Grid */
-    .articles-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-
-    .article-card {
-      background: var(--bg-primary);
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: var(--shadow-md);
-      transition: all 0.3s ease;
-    }
-
-    .article-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .article-image {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-
-    .article-content {
-      padding: 1.5rem;
-    }
-
-    .article-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      line-height: 1.4;
-    }
-
-    .article-excerpt {
-      color: var(--text-secondary);
-      line-height: 1.6;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    /* Contact Form */
-    .contact-form {
-      background: var(--bg-primary);
-      border-radius: 20px;
-      padding: 2rem;
-      box-shadow: var(--shadow-md);
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-
-    .form-label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .form-input {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      border: 2px solid var(--border-color);
-      border-radius: 10px;
-      font-family: inherit;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      background: var(--bg-secondary);
-    }
-
-    .form-input:focus {
-      outline: none;
-      border-color: var(--accent-color);
-      background: var(--bg-primary);
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-    }
-
-    .form-textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
-
-    /* Loading Animation */
-    .loading {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 2px solid transparent;
-      border-top: 2px solid currentColor;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    /* Animations */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .mobile-menu-btn {
-        display: block;
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+    const supabase = createClient(
+      'https://lvobywbpmssawuukzskm.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2b2J5d2JwbXNzYXd1dWt6c2ttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTExMTc4MDAsImV4cCI6MjA2NjY5MzgwMH0.Uk4RXPnrQq5wagaBzfPGH3Tf5qexktRIbHs0ovfXWxE'
+    );
+
+    // Login/logout logic
+    const session = await supabase.auth.getSession();
+    const navList = document.querySelector('nav ul');
+    const loginItem = navList.querySelector('li:last-child');
+    if (session.data.session) {
+      loginItem.innerHTML = '<a href="#" id="logout-link">Logout</a>';
+      document.getElementById('logout-link').addEventListener('click', async () => {
+        await supabase.auth.signOut();
+        window.location.reload();
+      });
+    } else {
+      loginItem.innerHTML = '<a href="login.html">Login</a>';
+    }
+
+    // Load profile data
+    async function loadProfileData() {
+      const { data, error } = await supabase.from('profile_data').select('*').limit(1).single();
+      if (error) {
+        console.error('Gagal memuat data profil:', error.message);
+        return;
       }
 
-      nav ul {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(20px);
-        flex-direction: column;
-        padding: 1rem;
-        box-shadow: var(--shadow-lg);
-      }
+      document.getElementById('profile-img').src = data.photo_url || 'https://via.placeholder.com/150';
+      document.getElementById('bio-text').textContent = data.biodata || '';
 
-      nav ul.active {
-        display: flex;
-      }
+      const skillList = document.getElementById('skill-list');
+      skillList.innerHTML = '';
+      data.skills?.forEach(skill => {
+        const li = document.createElement('li');
+        li.textContent = skill;
+        skillList.appendChild(li);
+      });
 
-      .hero h1 {
-        font-size: 2.5rem;
-      }
+      document.getElementById('experience-timeline').innerHTML = data.experience || '';
+      document.getElementById('organization-timeline').innerHTML = data.organization || '';
+      document.getElementById('activity-timeline').innerHTML = data.activity || '';
 
-      .section-title {
-        font-size: 2rem;
-      }
+      const educationList = document.getElementById('education-list');
+      educationList.innerHTML = '';
+      data.education?.forEach(edu => {
+        const li = document.createElement('li');
+        li.textContent = edu;
+        educationList.appendChild(li);
+      });
 
-      .container {
-        padding: 1rem;
-      }
-
-      .profile-image {
-        width: 150px;
-        height: 150px;
-      }
-
-      .cta-buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .skills-grid {
-        grid-template-columns: 1fr;
-      }
+      const projectList = document.getElementById('project-list');
+      projectList.innerHTML = '';
+      data.projects?.forEach(proj => {
+        const li = document.createElement('li');
+        li.textContent = proj;
+        projectList.appendChild(li);
+      });
     }
 
-    /* Scroll Progress Bar */
-    .scroll-progress {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 0%;
-      height: 3px;
-      background: var(--gradient-1);
-      z-index: 1001;
-      transition: width 0.1s ease;
+    // Load articles
+    async function loadArticles() {
+      const { data: articles, error } = await supabase.from('articles').select('*');
+      const container = document.getElementById('article-list');
+      container.innerHTML = '';
+      articles.forEach(article => {
+        container.innerHTML += `
+          <div class="article-card">
+            <img src="${article.image_url || 'https://via.placeholder.com/400x200'}" alt="Gambar Artikel" />
+            <h3>${article.title}</h3>
+            <p>${article.content}</p>
+          </div>
+        `;
+      });
     }
-  </style>
+
+    // Jalankan setelah halaman dimuat
+    window.addEventListener('DOMContentLoaded', () => {
+      loadProfileData();
+      loadArticles();
+    });
+  </script>
 </head>
 <body>
-  <div class="bg-animation"></div>
-  <div class="scroll-progress"></div>
-
   <header class="navbar">
     <div class="container">
-      <h1 class="logo">Portfolio</h1>
+      <h1 class="logo">Portofolio</h1>
       <nav>
-        <button class="mobile-menu-btn">☰</button>
         <ul>
-          <li><a href="#biodata">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#organization">Organization</a></li>
+          <li><a href="#biodata">Biodata</a></li>
+          <li><a href="#skills">Skill</a></li>
+          <li><a href="#experience">Pengalaman</a></li>
+          <li><a href="#organization">Organisasi</a></li>
           <li><a href="#activity">Activity</a></li>
-          <li><a href="#education">Education</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#articles">Articles</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#education">Pendidika</a></li>
+          <li><a href="#projects">Proyek</a></li>
+          <li><a href="#articles">Artikel</a></li>
+          <li><a href="#contact">Kontak</a></li>
           <li><a href="login.html">Login</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="hero-content">
-      <img id="profile-img" src="https://via.placeholder.com/200" alt="Profile Photo" class="profile-image"/>
-      <h1>Hi, I'm <span id="name-placeholder">Developer</span></h1>
-      <p class="subtitle">Full Stack Developer & Creative Problem Solver</p>
-      <div class="cta-buttons">
-        <a href="#projects" class="btn btn-primary">View My Work</a>
-        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-      </div>
-    </div>
-  </section>
-
   <main class="container">
+    <img id="profile-img" src="https://via.placeholder.com/150" alt="Foto Profil" style="border-radius: 100px; width: 300px;"/>
     <section id="biodata" class="section">
-      <div class="section-header">
-        <h2 class="section-title">About Me</h2>
-        <p class="section-subtitle">Get to know more about my background and journey</p>
-      </div>
-      <div class="card">
-        <p id="bio-text">Loading biodata...</p>
-      </div>
+      <h2>Biodata Singkat</h2>
+      <p id="bio-text">Memuat biodata...</p>
     </section>
 
     <section id="skills" class="section">
-      <div class="section-header">
-        <h2 class="section-title">Skills & Expertise</h2>
-        <p class="section-subtitle">Technologies and tools I work with</p>
-      </div>
-      <div class="skills-grid">
-        <div class="skill-category">
-          <h3>Frontend Development</h3>
-          <div class="skill-tags" id="frontend-skills">
-            <!-- Skills will be loaded here -->
-          </div>
-        </div>
-        <div class="skill-category">
-          <h3>Backend Development</h3>
-          <div class="skill-tags" id="backend-skills">
-            <!-- Skills will be loaded here -->
-          </div>
-        </div>
-        <div class="skill-category">
-          <h3>Tools & Others</h3>
-          <div class="skill-tags" id="other-skills">
-            <!-- Skills will be loaded here -->
-          </div>
-        </div>
-      </div>
+      <h2>Skill Set</h2>
+      <ul id="skill-list"></ul>
     </section>
 
     <section id="experience" class="section">
-      <div class="section-header">
-        <h2 class="section-title">Experience</h2>
-        <p class="section-subtitle">My professional journey and achievements</p>
-      </div>
-      <div class="timeline" id="experience-timeline">
-        <!-- Experience items will be loaded here -->
-      </div>
+      <h2>Pengalaman</h2>
+      <div id="experience-timeline"></div>
     </section>
 
     <section id="organization" class="section">
-      <div class="section-header">
-        <h2 class="section-title">Organizations</h2>
-        <p class="section-subtitle">Communities and organizations I'm part of</p>
-      </div>
-      <div class="timeline" id="organization-timeline">
-        <!-- Organization items will be loaded here -->
-      </div>
+      <h2>Organisasi</h2>
+      <div id="organization-timeline"></div>
     </section>
 
     <section id="activity" class="section">
-      <div class="section-header">
-        <h2 class="section-title">Activities</h2>
-        <p class="section-subtitle">Events and activities I've participated in</p>
-      </div>
-      <div class="timeline" id="activity-timeline">
-        <!-- Activity items will be loaded here -->
-      </div>
+      <h2>Aktifitas</h2>
+      <div id="activity-timeline"></div>
     </section>
 
     <section id="education" class="section">
-      <div class="section-header">
-        <h2 class="section-title">Education</h2>
-        <p class="section-subtitle">My academic background and certifications</p>
-      </div>
-      <div class="timeline" id="education-timeline">
-        <!-- Education items will be loaded here -->
-      </div>
+      <h2>Pendidikan</h2>
+      <ul id="education-list"></ul>
     </section>
 
     <section id="projects" class="section">
-      <div class="section-header">
-        <h2 class="section-title">Featured Projects</h2>
-        <p class="section-subtitle">Some of my recent work and personal projects</p>
-      </div>
-      <div class="projects-grid" id="project-list">
-        <!-- Project cards will be loaded here -->
-      </div>
+      <h2>Proyek</h2>
+      <ul id="project-list"></ul>
     </section>
 
     <section id="articles" class="section">
-      <div class="section-header">
-        <h2 class="section-title">Latest Articles</h2>
-        <p class="section-subtitle">Insights and thoughts on development and technology</p>
-      </div>
-      <div class="articles-grid" id="article-list">
-        <!-- Article cards will be loaded here -->
-      </div>
+      <h2>Artikel Terkait Proyek</h2>
+      <div id="article-list"></div>
     </section>
 
     <section id="contact" class="section">
-      <div class="section-header">
-        <h2 class="section-title">Let's Work Together</h2>
-        <p class="section-subtitle">Have a project in mind? Let's discuss how we can bring it to life</p>
-      </div>
-      <div class="contact-form">
-        <div style="text-align: center; margin-bottom: 2rem;">
-          <p><strong>Email:</strong> kamu@email.com</p>
-          <p><strong>Instagram:</strong> @kamu</p>
-          <p><strong>Service Fee:</strong> Starting from Rp500.000 / project</p>
-        </div>
-        <form id="contact-form">
-          <div class="form-group">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" id="name" name="name" class="form-input" required>
-          </div>
-          <div class="form-group">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" id="email" name="email" class="form-input" required>
-          </div>
-          <div class="form-group">
-            <label for="message" class="form-label">Message</label>
-            <textarea id="message" name="message" class="form-input form-textarea" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary" style="width: 100%;">
-            <span class="btn-text">Send Message</span>
-            <span class="loading" style="display: none;"></span>
-          </button>
-        </form>
-      </div>
+      <h2>Contact Me</h2>
+      <p>Email: kamu@email.com</p>
+      <p>Instagram: @kamu</p>
+      <p>Service Fee: Mulai dari Rp500.000 / proyek</p>
+      <form id="contact-form">
+        <label for="name">Nama</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+        <label for="message">Pesan</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+        <button type="submit">Kirim</button>
+      </form>
     </section>
+
+    <script type="module" src="./contact-submit.js"></script>
+    <script type="module" src="./load-articles.js"></script>
   </main>
-
-  <script type="module">
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-    
-    const supabase = createClient(
-      'https://lvobywbpmssawuukzskm.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2b2J5d2JwbXNzYXd1dWt6c2ttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTExMTc4MDAsImV4cCI6MjA2NjY5MzgwMH0.Uk4RXPnrQq5wagaBzfPGH3Tf5qexktRIbHs0ovfXWxE'
-    );
-
-    // Enhanced UI Interactions
-    class PortfolioUI {
-      constructor() {
-        this.init();
-      }
-
-      init() {
-        this.setupScrollEffects();
-        this.setupMobileMenu();
-        this.setupSmoothScrolling();
-        this.setupScrollProgress();
-        this.setupAnimations();
-        this.loadData();
-      }
-
-      setupScrollEffects() {
-        const navbar = document.querySelector('.navbar');
-        const sections = document.querySelectorAll('.section');
-
-        const observerOptions = {
-          threshold: 0.1,
-          rootMargin: '0px 0px -100px 0px'
-        };
-
-        const sectionObserver = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-            }
-          });
-        }, observerOptions);
-
-        sections.forEach(section => {
-          sectionObserver.observe(section);
-        });
-
-        window.addEventListener('scroll', () => {
-          if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-          } else {
-            navbar.classList.remove('scrolled');
-          }
-        });
-      }
-
-      setupMobileMenu() {
-        const mobileBtn = document.querySelector('.mobile-menu-btn');
-        const navMenu = document.querySelector('nav ul');
-
-        mobileBtn.addEventListener('click', () => {
-          navMenu.classList.toggle('active');
-        });
-
-        // Close menu when clicking on a link
-        navMenu.addEventListener('click', (e) => {
-          if (e.target.tagName === 'A') {
-            navMenu.classList.remove('active');
-          }
-        });
-      }
-
-      setupSmoothScrolling() {
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-          anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-              const offsetTop = target.offsetTop - 100;
-              window.scrollTo({
-                top: offsetTop,
-                behavior: 'smooth'
-              });
-            }
-          });
-        });
-      }
-
-      setupScrollProgress() {
-        const progressBar = document.querySelector('.scroll-progress');
-        
-        window.addEventListener('scroll', () => {
-          const scrollTop = window.pageYOffset;
-          const docHeight = document.body.scrollHeight - window.innerHeight;
-          const scrollPercent = (scrollTop / docHeight) * 100;
-          progressBar.style.width = scrollPercent + '%';
-        });
-      }
-
-      setupAnimations() {
-        // Add staggered animations to cards
-        const cards = document.querySelectorAll('.card, .skill-category, .timeline-item');
-        cards.forEach((card, index) => {
-          card.style.animationDelay = `${index * 0.1}s`;
-        });
-      }
-
-      async loadData() {
-        try {
-          await this.loadProfileData();
-          await this.loadArticles();
-          await this.setupContactForm();
-        } catch (error) {
-          console.error('Error loading data:', error);
-        }
-      }
-
-      async loadProfileData() {
-        try {
-          const { data, error } = await supabase.from('profile_data').select('*').limit(1).single();
-          
-          if (error) {
-            console.error('Failed to load profile data:', error.message);
-            this.loadDemoData();
-            return;
-          }
-
-          // Update profile image
-          const profileImg = document.getElementById('profile-img');
-          if (data.photo_url) {
-            profileImg.src = data.photo_url;
-          }
-
-          // Update bio text
-          const bioText = document.getElementById('bio-text');
-          bioText.textContent = data.biodata || 'Loading biodata...';
-
-          // Update name in hero
-          const namePlaceholder = document.getElementById('name-placeholder');
-          const name = data.biodata ? data.biodata.split(' ')[0] : 'Developer';
-          namePlaceholder.textContent = name;
-
-          // Load skills into categories
-          this.loadSkills(data.skills || []);
-
-          // Load timeline data
-          this.loadTimeline('experience-timeline', data.experience);
-          this.loadTimeline('organization-timeline', data.organization);
-          this.loadTimeline('activity-timeline', data.activity);
-          this.loadEducation(data.education || []);
-          this.loadProjects(data.projects || []);
-
-        } catch (error) {
-          console.error('Error loading profile:', error);
-          this.loadDemoData();
-        }
-      }
-
-      loadDemoData() {
-        // Demo data for testing
-        const demoSkills = [
-          'JavaScript', 'React', 'Node.js', 'Python', 'HTML/CSS', 
-          'TypeScript', 'Vue.js', 'MongoDB', 'PostgreSQL', 'Git'
-        ];
-        
-        const demoProjects = [
-          'E-commerce Platform', 'Task Management App', 'Portfolio Website',
-          'Real-time Chat App', 'Data Visualization Dashboard'
-        ];
-
-        this.loadSkills(demoSkills);
-        this.loadProjects(demoProjects);
-      }
-
-      loadSkills(skills) {
-        const frontendSkills = ['React', 'Vue.js', 'JavaScript', 'TypeScript', 'HTML/CSS', 'Tailwind CSS'];
-        const backendSkills = ['Node.js', 'Python', 'Express.js', 'MongoDB', 'PostgreSQL', 'API Development'];
-        const otherSkills = ['Git', 'Docker', 'AWS', 'Figma', 'Photoshop', 'Linux'];
-
-        const frontendContainer = document.getElementById('frontend-skills');
-        const backendContainer = document.getElementById('backend-skills');
-        const otherContainer = document.getElementById('other-skills');
-
-        // Clear existing content
-        frontendContainer.innerHTML = '';
-        backendContainer.innerHTML = '';
-        otherContainer.innerHTML = '';
-
-        // Categorize and display skills
-        skills.forEach(skill => {
-          const skillTag = document.createElement('span');
-          skillTag.className = 'skill-tag';
-          skillTag.textContent = skill;
-
-          if (frontendSkills.some(fs => skill.toLowerCase().includes(fs.toLowerCase()))) {
-            frontendContainer.appendChild(skillTag);
-          } else if (backendSkills.some(bs => skill.toLowerCase().includes(bs.toLowerCase()))) {
-            backendContainer.appendChild(skillTag);
-          } else {
-            otherContainer.appendChild(skillTag);
-          }
-        });
-
-        // Add default skills if containers are empty
-        if (frontendContainer.children.length === 0) {
-          frontendSkills.slice(0, 4).forEach(skill => {
-            const skillTag = document.createElement('span');
-            skillTag.className = 'skill-tag';
-            skillTag.textContent = skill;
-            frontendContainer.appendChild(skillTag);
-          });
-        }
-
-        if (backendContainer.children.length === 0) {
-          backendSkills.slice(0, 4).forEach(skill => {
-            const skillTag = document.createElement('span');
-            skillTag.className = 'skill-tag';
-            skillTag.textContent = skill;
-            backendContainer.appendChild(skillTag);
-          });
-        }
-
-        if (otherContainer.children.length === 0) {
-          otherSkills.slice(0, 4).forEach(skill => {
-            const skillTag = document.createElement('span');
-            skillTag.className = 'skill-tag';
-            skillTag.textContent = skill;
-            otherContainer.appendChild(skillTag);
-          });
-        }
-      }
-
-      loadTimeline(containerId, htmlContent) {
-        const container = document.getElementById(containerId);
-        if (htmlContent) {
-          container.innerHTML = htmlContent;
-        } else {
-          container.innerHTML = `
-            <div class="timeline-item">
-              <div class="date">Present</div>
-              <h4>No data available</h4>
-              <p>Data will be loaded from the database.</p>
-            </div>
-          `;
-        }
-      }
-
-      loadEducation(education) {
-        const container = document.getElementById('education-timeline');
-        container.innerHTML = '';
-
-        if (education && education.length > 0) {
-          education.forEach((edu, index) => {
-            const item = document.createElement('div');
-            item.className = 'timeline-item';
-            item.innerHTML = `
-              <div class="date">2020 - 2024</div>
-              <h4>${edu}</h4>
-              <p>Educational achievement and learning experience.</p>
-            `;
-            container.appendChild(item);
-          });
-        } else {
-          container.innerHTML = `
-            <div class="timeline-item">
-              <div class="date">2020 - 2024</div>
-              <h4>Computer Science Degree</h4>
-              <p>Bachelor's degree with focus on software development and computer systems.</p>
-            </div>
-          `;
-        }
-      }
-
-      loadProjects(projects) {
-        const container = document.getElementById('project-list');
-        container.innerHTML = '';
-
-        const projectTemplates = [
-          {
-            title: 'E-commerce Platform',
-            description: 'Full-stack e-commerce solution with React, Node.js, and MongoDB. Features include user authentication, product catalog, shopping cart, and payment integration.',
-            tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-            icon: '🛒'
-          },
-          {
-            title: 'Task Management App',
-            description: 'Collaborative task management application with real-time updates, team collaboration features, and progress tracking.',
-            tags: ['Vue.js', 'Firebase', 'Vuex', 'CSS3'],
-            icon: '📋'
-          },
-          {
-            title: 'Data Visualization Dashboard',
-            description: 'Interactive dashboard for data analysis and visualization with charts, graphs, and real-time data updates.',
-            tags: ['React', 'D3.js', 'Chart.js', 'API'],
-            icon: '📊'
-          }
-        ];
-
-        if (projects && projects.length > 0) {
-          projects.forEach((project, index) => {
-            const template = projectTemplates[index % projectTemplates.length];
-            const projectCard = document.createElement('div');
-            projectCard.className = 'project-card';
-            projectCard.innerHTML = `
-              <div class="project-image">${template.icon}</div>
-              <div class="project-content">
-                <h3 class="project-title">${project}</h3>
-                <p class="project-description">${template.description}</p>
-                <div class="project-tags">
-                  ${template.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
-                </div>
-              </div>
-            `;
-            container.appendChild(projectCard);
-          });
-        } else {
-          projectTemplates.forEach(template => {
-            const projectCard = document.createElement('div');
-            projectCard.className = 'project-card';
-            projectCard.innerHTML = `
-              <div class="project-image">${template.icon}</div>
-              <div class="project-content">
-                <h3 class="project-title">${template.title}</h3>
-                <p class="project-description">${template.description}</p>
-                <div class="project-tags">
-                  ${template.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
-                </div>
-              </div>
-            `;
-            container.appendChild(projectCard);
-          });
-        }
-      }
-
-      async loadArticles() {
-        try {
-          const { data: articles, error } = await supabase.from('articles').select('*');
-          const container = document.getElementById('article-list');
-          container.innerHTML = '';
-
-          if (error) {
-            console.error('Failed to load articles:', error);
-            this.loadDemoArticles();
-            return;
-          }
-
-          if (articles && articles.length > 0) {
-            articles.forEach(article => {
-              const articleCard = document.createElement('div');
-              articleCard.className = 'article-card';
-              articleCard.innerHTML = `
-                <img src="${article.image_url || 'https://via.placeholder.com/400x200?text=Article+Image'}" 
-                     alt="${article.title}" class="article-image" />
-                <div class="article-content">
-                  <h3 class="article-title">${article.title}</h3>
-                  <p class="article-excerpt">${article.content}</p>
-                </div>
-              `;
-              container.appendChild(articleCard);
-            });
-          } else {
-            this.loadDemoArticles();
-          }
-        } catch (error) {
-          console.error('Error loading articles:', error);
-          this.loadDemoArticles();
-        }
-      }
-
-      loadDemoArticles() {
-        const container = document.getElementById('article-list');
-        const demoArticles = [
-          {
-            title: 'Building Modern Web Applications',
-            content: 'Exploring the latest trends and best practices in modern web development, including React, Vue.js, and performance optimization techniques.',
-            image: 'https://via.placeholder.com/400x200?text=Web+Development'
-          },
-          {
-            title: 'Database Design Principles',
-            content: 'Understanding the fundamentals of database design, normalization, and optimization for scalable applications.',
-            image: 'https://via.placeholder.com/400x200?text=Database+Design'
-          },
-          {
-            title: 'User Experience in Web Design',
-            content: 'Creating intuitive and engaging user experiences through thoughtful design and user-centered development approaches.',
-            image: 'https://via.placeholder.com/400x200?text=UX+Design'
-          }
-        ];
-
-        container.innerHTML = '';
-        demoArticles.forEach(article => {
-          const articleCard = document.createElement('div');
-          articleCard.className = 'article-card';
-          articleCard.innerHTML = `
-            <img src="${article.image}" alt="${article.title}" class="article-image" />
-            <div class="article-content">
-              <h3 class="article-title">${article.title}</h3>
-              <p class="article-excerpt">${article.content}</p>
-            </div>
-          `;
-          container.appendChild(articleCard);
-        });
-      }
-
-      async setupContactForm() {
-        const form = document.getElementById('contact-form');
-        const submitBtn = form.querySelector('button[type="submit"]');
-        const btnText = submitBtn.querySelector('.btn-text');
-        const loading = submitBtn.querySelector('.loading');
-
-        form.addEventListener('submit', async (e) => {
-          e.preventDefault();
-          
-          // Show loading state
-          btnText.style.display = 'none';
-          loading.style.display = 'inline-block';
-          submitBtn.disabled = true;
-
-          // Get form data
-          const formData = new FormData(form);
-          const data = {
-            name: formData.get('name'),
-            email: formData.get('email'),
-            message: formData.get('message'),
-            created_at: new Date().toISOString()
-          };
-
-          try {
-            // Here you would typically send the data to your backend
-            // For demo purposes, we'll just simulate a delay
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            
-            // Show success message
-            this.showNotification('Message sent successfully!', 'success');
-            form.reset();
-          } catch (error) {
-            console.error('Error sending message:', error);
-            this.showNotification('Failed to send message. Please try again.', 'error');
-          } finally {
-            // Reset button state
-            btnText.style.display = 'inline';
-            loading.style.display = 'none';
-            submitBtn.disabled = false;
-          }
-        });
-      }
-
-      showNotification(message, type = 'info') {
-        // Create notification element
-        const notification = document.createElement('div');
-        notification.className = `notification notification-${type}`;
-        notification.style.cssText = `
-          position: fixed;
-          top: 20px;
-          right: 20px;
-          background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6'};
-          color: white;
-          padding: 1rem 1.5rem;
-          border-radius: 10px;
-          box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-          z-index: 1000;
-          animation: slideInRight 0.3s ease;
-          max-width: 300px;
-        `;
-        notification.textContent = message;
-
-        // Add animation styles
-        const style = document.createElement('style');
-        style.textContent = `
-          @keyframes slideInRight {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-          }
-          @keyframes slideOutRight {
-            from { transform: translateX(0); opacity: 1; }
-            to { transform: translateX(100%); opacity: 0; }
-          }
-        `;
-        document.head.appendChild(style);
-
-        document.body.appendChild(notification);
-
-        // Auto remove after 5 seconds
-        setTimeout(() => {
-          notification.style.animation = 'slideOutRight 0.3s ease';
-          setTimeout(() => {
-            if (notification.parentNode) {
-              notification.parentNode.removeChild(notification);
-            }
-          }, 300);
-        }, 5000);
-      }
-
-      // Login/logout functionality
-      async handleAuth() {
-        try {
-          const session = await supabase.auth.getSession();
-          const navList = document.querySelector('nav ul');
-          const loginItem = navList.querySelector('li:last-child');
-          
-          if (session.data.session) {
-            loginItem.innerHTML = '<a href="#" id="logout-link">Logout</a>';
-            const logoutLink = document.getElementById('logout-link');
-            logoutLink.addEventListener('click', async (e) => {
-              e.preventDefault();
-              await supabase.auth.signOut();
-              window.location.reload();
-            });
-          } else {
-            loginItem.innerHTML = '<a href="login.html">Login</a>';
-          }
-        } catch (error) {
-          console.error('Auth error:', error);
-        }
-      }
-    }
-
-    // Initialize the portfolio
-    document.addEventListener('DOMContentLoaded', () => {
-      new PortfolioUI();
-    });
-
-    // Add some interactive effects
-    document.addEventListener('mousemove', (e) => {
-      const cursor = document.querySelector('.cursor');
-      if (!cursor) {
-        const newCursor = document.createElement('div');
-        newCursor.className = 'cursor';
-        newCursor.style.cssText = `
-          position: fixed;
-          width: 20px;
-          height: 20px;
-          border-radius: 50%;
-          background: rgba(59, 130, 246, 0.3);
-          pointer-events: none;
-          z-index: 9999;
-          transition: transform 0.1s ease;
-        `;
-        document.body.appendChild(newCursor);
-      }
-      
-      const currentCursor = document.querySelector('.cursor');
-      currentCursor.style.left = e.clientX - 10 + 'px';
-      currentCursor.style.top = e.clientY - 10 + 'px';
-    });
-
-    // Add hover effects for interactive elements
-    document.addEventListener('mouseenter', (e) => {
-      if (e.target.matches('button, a, .card, .skill-tag')) {
-        const cursor = document.querySelector('.cursor');
-        if (cursor) {
-          cursor.style.transform = 'scale(1.5)';
-          cursor.style.background = 'rgba(59, 130, 246, 0.5)';
-        }
-      }
-    }, true);
-
-    document.addEventListener('mouseleave', (e) => {
-      if (e.target.matches('button, a, .card, .skill-tag')) {
-        const cursor = document.querySelector('.cursor');
-        if (cursor) {
-          cursor.style.transform = 'scale(1)';
-          cursor.style.background = 'rgba(59, 130, 246, 0.3)';
-        }
-      }
-    }, true);
-  </script>
 </body>
 </html>
