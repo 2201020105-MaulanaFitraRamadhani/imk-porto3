@@ -29,7 +29,7 @@ profileForm.addEventListener('submit', async (e) => {
     }
   }
 
-  const { error } = await supabase.from('profil_data').upsert({
+  const { error } = await supabase.from('profile_data').upsert({
     id: 1, // asumsi hanya satu data profil
     photo_url: photoUrl,
     biodata,
