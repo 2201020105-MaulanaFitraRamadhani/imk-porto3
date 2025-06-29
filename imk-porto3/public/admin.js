@@ -19,17 +19,17 @@ profileForm.addEventListener('submit', async (e) => {
   let photoUrl = '';
   if (photoInput.files.length > 0) {
     const file = photoInput.files[0];
-    const { data, error } = await supabase.storage.from('profile').upload(`foto_${Date.now()}`, file, {
+    const { data, error } = await supabase.storage.from('profile_data').upload(`foto_${Date.now()}`, file, {
       cacheControl: '3600',
       upsert: false
     });
     if (!error) {
-      const { data: publicUrl } = supabase.storage.from('profile').getPublicUrl(data.path);
+      const { data: publicUrl } = supabase.storage.from('profile_data').getPublicUrl(data.path);
       photoUrl = publicUrl.publicUrl;
     }
   }
 
-  const { error } = await supabase.from('profil').upsert({
+  const { error } = await supabase.from('profil_data').upsert({
     id: 1, // asumsi hanya satu data profil
     photo_url: photoUrl,
     biodata,
