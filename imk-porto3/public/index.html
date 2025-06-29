@@ -94,16 +94,16 @@
 </head>
 <body>
   <header class="navbar">
-    <div class="container">
+    <div class="container navbar-content">
       <h1 class="logo">Portofolio</h1>
       <nav>
-        <ul>
+        <ul class="nav-links">
           <li><a href="#biodata">Biodata</a></li>
           <li><a href="#skills">Skill</a></li>
           <li><a href="#experience">Pengalaman</a></li>
           <li><a href="#organization">Organisasi</a></li>
-          <li><a href="#activity">Activity</a></li>
-          <li><a href="#education">Pendidika</a></li>
+          <li><a href="#activity">Aktifitas</a></li>
+          <li><a href="#education">Pendidikan</a></li>
           <li><a href="#projects">Proyek</a></li>
           <li><a href="#articles">Artikel</a></li>
           <li><a href="#contact">Kontak</a></li>
@@ -113,66 +113,77 @@
     </div>
   </header>
 
-  <main class="container">
-    <img id="profile-img" src="https://via.placeholder.com/150" alt="Foto Profil" style="border-radius: 100px; width: 300px;"/>
-    <section id="biodata" class="section">
-      <h2>Biodata Singkat</h2>
-      <p id="bio-text">Memuat biodata...</p>
+  <main class="container main-content">
+    <section id="hero" class="section hero-section">
+      <div class="hero-profile">
+        <img id="profile-img" src="https://via.placeholder.com/150" alt="Foto Profil" class="profile-image"/>
+        <div class="hero-text">
+          <h2 class="hero-title">Halo, Saya [Nama Anda]</h2>
+          <p id="bio-text" class="hero-bio">Memuat biodata...</p>
+        </div>
+      </div>
     </section>
 
     <section id="skills" class="section">
       <h2>Skill Set</h2>
-      <ul id="skill-list"></ul>
+      <ul id="skill-list" class="skill-tags"></ul>
     </section>
 
     <section id="experience" class="section">
       <h2>Pengalaman</h2>
-      <div id="experience-timeline"></div>
+      <div id="experience-timeline" class="timeline"></div>
     </section>
 
     <section id="organization" class="section">
       <h2>Organisasi</h2>
-      <div id="organization-timeline"></div>
+      <div id="organization-timeline" class="timeline"></div>
     </section>
 
     <section id="activity" class="section">
       <h2>Aktifitas</h2>
-      <div id="activity-timeline"></div>
+      <div id="activity-timeline" class="timeline"></div>
     </section>
 
     <section id="education" class="section">
       <h2>Pendidikan</h2>
-      <ul id="education-list"></ul>
+      <ul id="education-list" class="timeline-list"></ul>
     </section>
 
     <section id="projects" class="section">
       <h2>Proyek</h2>
-      <ul id="project-list"></ul>
+      <ul id="project-list" class="project-grid"></ul>
     </section>
 
     <section id="articles" class="section">
       <h2>Artikel Terkait Proyek</h2>
-      <div id="article-list"></div>
+      <div id="article-list" class="article-grid"></div>
     </section>
 
     <section id="contact" class="section">
-      <h2>Contact Me</h2>
-      <p>Email: kamu@email.com</p>
-      <p>Instagram: @kamu</p>
-      <p>Service Fee: Mulai dari Rp500.000 / proyek</p>
-      <form id="contact-form">
+      <h2>Hubungi Saya</h2>
+      <div class="contact-info">
+        <p><strong>Email:</strong> kamu@email.com</p>
+        <p><strong>Instagram:</strong> @kamu</p>
+        <p><strong>Biaya Layanan:</strong> Mulai dari Rp500.000 / proyek</p>
+      </div>
+      <form id="contact-form" class="contact-form">
         <label for="name">Nama</label>
         <input type="text" id="name" name="name" required>
         <label for="email">Email</label>
         <input type="email" id="email" name="email" required>
         <label for="message">Pesan</label>
         <textarea id="message" name="message" rows="4" required></textarea>
-        <button type="submit">Kirim</button>
+        <button type="submit">Kirim Pesan</button>
       </form>
     </section>
 
     <script type="module" src="./contact-submit.js"></script>
     <script type="module" src="./load-articles.js"></script>
   </main>
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Portofolio Pribadi. Hak Cipta Dilindungi.</p>
+    </div>
+  </footer>
 </body>
 </html>
