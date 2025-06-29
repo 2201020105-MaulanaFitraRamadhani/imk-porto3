@@ -1,4 +1,4 @@
-// js/load-articles.js
+// ./load-articles.js
 import { supabase } from './supabase-client.js';
 
 async function fetchArticles() {

@@ -1,4 +1,4 @@
-// admin.js
+// ./admin.js
 import { supabase } from './supabase-client.js';
 
 // === Simpan Profil ===
@@ -70,7 +70,10 @@ document.getElementById('article-form').addEventListener('submit', async (e) => 
 // === Tampilkan Data dari Tabel Kontak ===
 // Tampilkan kontak dari tabel 'contacts'
 async function loadContacts() {
-  const { data, error } = await supabase.from('contacts').select('*');
+  const { data: contacts, error } = await supabase
+    .from('contacts')
+    .select('*');
+
   if (error) {
     console.error('Gagal mengambil kontak:', error);
     return;
@@ -79,21 +82,21 @@ async function loadContacts() {
   const tableBody = document.getElementById('contact-table-body');
   tableBody.innerHTML = '';
 
-  data.forEach(item => {
-    const row = `
-      <tr>
-        <td>${item.name || '-'}</td>
-        <td>${item.email || '-'}</td>
-        <td>${item.message || '-'}</td>
-      </tr>`;
-    tableBody.innerHTML += row;
+  contacts.forEach(item => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${item.name}</td>
+      <td>${item.email}</td>
+      <td>${item.message}</td>
+    `;
+    tableBody.appendChild(row);
   });
 }
 
-// Panggil fungsi jika berada di halaman admin.html
+// Pastikan dipanggil saat berada di halaman admin
 if (window.location.pathname.includes('admin.html')) {
-  loadProfileData();
-  loadContacts(); // panggil di sini juga
+  loadContacts();
 }
 
-// loadContacts();
+
+loadContacts();
