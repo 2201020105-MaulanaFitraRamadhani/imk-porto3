@@ -8,7 +8,16 @@ document.getElementById('contact-form').addEventListener('submit', async functio
   const email = document.getElementById('email').value.trim();
   const message = document.getElementById('message').value.trim();
 
-  const { error } = await supabase.from('contacts').insert([{ name, email, message }]);
+  
+const { data, error } = await supabase
+.from('contacts')
+.insert([
+  { name: name },
+  { email: email },
+  { message: message },
+])
+.select()
+        
 
   if (error) {
     alert('Gagal mengirim pesan.');
