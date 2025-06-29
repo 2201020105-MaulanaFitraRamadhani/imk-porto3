@@ -1,104 +1,74 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard Admin</title>
-  <link rel="stylesheet" href="./style.css"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <script type="module" src="./admin.js" defer></script>
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Dashboard Admin</h1>
+  <h1>Admin Dashboard</h1>
+  <button onclick="location.href='index.html'">Kembali ke Beranda</button>
 
-    <!-- Tombol Kembali -->
-    <a href="index.html" class="back-home">← Kembali ke Beranda</a>
+  <!-- === PROFILE EDIT SECTION === -->
+  <section>
+    <h2>Edit Profil</h2>
+    <form id="profile-form">
+      <label>Foto Profil (Link URL):</label>
+      <input type="text" name="photo_url"><br>
 
-    <!-- === SECTION: Edit Data Profil === -->
-    <section class="section">
-      <h2>Edit Data Profil</h2>
-      <form id="profile-form">
-        <label for="profilePhoto">Foto Profil:</label>
-        <input type="file" id="profilePhoto" name="profilePhoto" accept="image/*"/>
+      <label>Biodata Singkat:</label>
+      <textarea name="biodata"></textarea><br>
 
-        <label for="biodata">Biodata:</label>
-        <textarea id="biodata" rows="3"></textarea>
+      <label>Skill Set (pisahkan dengan koma):</label>
+      <input type="text" name="skills"><br>
 
-        <label for="skills">Skill Set (pisahkan dengan koma):</label>
-        <input type="text" id="skills" placeholder="Contoh: HTML, CSS, JavaScript"/>
+      <label>Pengalaman:</label>
+      <textarea name="experience"></textarea><br>
 
-        <label for="experience">Pengalaman:</label>
-        <textarea id="experience" rows="3"></textarea>
+      <label>Organisasi:</label>
+      <textarea name="organization"></textarea><br>
 
-        <label for="organization">Organisasi:</label>
-        <textarea id="organization" rows="3"></textarea>
+      <label>Kegiatan:</label>
+      <textarea name="activity"></textarea><br>
 
-        <label for="activity">Kegiatan:</label>
-        <textarea id="activity" rows="3"></textarea>
+      <label>Pendidikan (pisahkan dengan koma):</label>
+      <input type="text" name="education"><br>
 
-        <label for="education">Pendidikan (pisahkan dengan koma):</label>
-        <input type="text" id="education" />
+      <label>Proyek (pisahkan dengan koma):</label>
+      <input type="text" name="projects"><br>
 
-        <label for="projects">Proyek (pisahkan dengan koma):</label>
-        <input type="text" id="projects" />
+      <button type="submit">Simpan Profil</button>
+    </form>
+  </section>
 
-        <button type="submit">Simpan Perubahan</button>
-      </form>
-    </section>
+  <!-- === ARTICLE EDIT SECTION === -->
+  <section>
+    <h2>Daftar Artikel</h2>
+    <div id="article-list"></div>
+    <h3>Edit Artikel</h3>
+    <form id="edit-article-form">
+      <input type="hidden" name="id">
+      <label>Judul:</label>
+      <input type="text" name="title"><br>
+      <label>Konten:</label>
+      <textarea name="content"></textarea><br>
+      <label>URL Gambar:</label>
+      <input type="text" name="image_url"><br>
+      <button type="submit">Simpan Perubahan</button>
+    </form>
+  </section>
 
-    <!-- === SECTION: Tambah Artikel === -->
-    <section class="section">
-      <h2>Tambah Artikel</h2>
-      <form id="article-form">
-        <label for="articleTitle">Judul Artikel:</label>
-        <input type="text" id="articleTitle" required/>
-
-        <label for="articleImage">URL Gambar atau Upload:</label>
-        <input type="url" id="articleImage" placeholder="https://example.com/image.jpg" />
-
-        <label for="articleContent">Isi Artikel:</label>
-        <textarea id="articleContent" rows="4" required></textarea>
-
-        <button type="submit">Tambah Artikel</button>
-      </form>
-    </section>
-
-    <!-- === SECTION: Tabel Pesan Kontak === -->
-    <section class="section">
-      <h2>Data Kontak</h2>
-      <button onclick="loadContacts()">Tampilkan Kontak</button>
-      <pre id="contacts-output" style="background:#f4f4f4; padding: 10px; border: 1px solid #ccc;"></pre>
-
-    </section>
-  </div>
-  
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="./supabase-client.js"></script>
-    <script src="./admin.js"></script>
-    <script>
-    const supabase = supabase.createClient(
-      'https://lvobywbpmssawuukzskm.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2b2J5d2JwbXNzYXd1dWt6c2ttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTExMTc4MDAsImV4cCI6MjA2NjY5MzgwMH0.Uk4RXPnrQq5wagaBzfPGH3Tf5qexktRIbHs0ovfXWxE'
-    );
-
-    async function loadContacts() {
-      const { data, error } = await supabase
-        .from('contacts')
-        .select('*');
-
-      if (error) {
-        document.getElementById('contacts-output').innerText = 'Gagal mengambil data: ' + error.message;
-        return;
-      }
-
-      if (data.length === 0) {
-        document.getElementById('contacts-output').innerText = 'Tidak ada data kontak.';
-        return;
-      }
-
-      document.getElementById('contacts-output').innerText = JSON.stringify(data, null, 2);
-    }
-    </script>
-</body>
-
+  <!-- === CONTACT SECTION === -->
+  <section>
+    <h2>Pesan Kontak</h2>
+    <table border="1" id="contact-table">
+      <thead>
+        <tr><th>Nama</th><th>Email</th><th>Pesan</th><th>Tanggal</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
 </body>
 </html>
