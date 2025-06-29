@@ -48,47 +48,43 @@
   </header>
 
   <main class="container">
+    <!-- Tambahkan di dalam <body> -->
     <section id="biodata" class="section">
       <h2>Biodata Singkat</h2>
-      <p>Halo! Saya [Nama Kamu], seorang [profesi] yang memiliki minat dalam [bidang].</p>
+      <img id="profile-img" src="https://via.placeholder.com/150" alt="Foto Profil" style="border-radius: 100px; width: 150px;" />
+      <p id="bio-text">Memuat biodata...</p>
     </section>
 
     <section id="skills" class="section">
       <h2>Skill Set</h2>
-      <ul>
-        <li>HTML, CSS, JavaScript</li>
-        <li>React / Vue / Svelte</li>
-        <li>Node.js, Supabase</li>
-      </ul>
+      <ul id="skill-list"></ul>
     </section>
 
     <section id="experience" class="section">
       <h2>Pengalaman</h2>
-      <p>Berpengalaman dalam mengembangkan aplikasi web dan melakukan deployment menggunakan Vercel dan Supabase.</p>
+      <div id="experience-timeline"></div>
     </section>
 
     <section id="organization" class="section">
       <h2>Organisasi</h2>
-      <p>Aktif di komunitas developer dan organisasi kampus seperti [contoh organisasi].</p>
+      <div id="organization-timeline"></div>
     </section>
 
     <section id="activity" class="section">
       <h2>Kegiatan</h2>
-      <p>Ikut serta dalam hackathon, kontribusi open-source, dan kegiatan mentoring.</p>
+      <div id="activity-timeline"></div>
     </section>
 
     <section id="education" class="section">
       <h2>Pendidikan</h2>
-      <p>Sarjana Teknik Informatika dari Universitas [Nama Universitas].</p>
+      <ul id="education-list"></ul>
     </section>
 
     <section id="projects" class="section">
       <h2>Proyek</h2>
-      <ul>
-        <li>Sistem monitoring pH dan suhu berbasis web</li>
-        <li>Aplikasi klasifikasi bahasa isyarat</li>
-      </ul>
+      <ul id="project-list"></ul>
     </section>
+
 
     <section id="articles" class="section">
       <h2>Artikel Terkait Proyek</h2>
@@ -112,6 +108,10 @@
       
         loadArticles();
       </script>
+      <script type="module">
+        import { loadProfileData } from './profile-load.js';
+        loadProfileData();
+      </script>      
     </section>
 
     <section id="contact" class="section">
