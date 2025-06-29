@@ -9,14 +9,7 @@ document.getElementById('contact-form').addEventListener('submit', async functio
   const message = document.getElementById('message').value.trim();
 
   
-const { data, error } = await supabase
-.from('contacts')
-.insert([
-  { name: name },
-  { email: email },
-  { message: message },
-])
-.select()
+  const { error } = await supabase.from('contacts').insert([{ name, email, message }]);
         
 
 if (error) {
