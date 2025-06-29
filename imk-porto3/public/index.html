@@ -2,16 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Portofolio Pribadi</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <script defer src="main.js" type="module"></script>
   <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-    const supabase = createClient('https://lvobywbpmssawuukzskm.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2b2J5d2JwbXNzYXd1dWt6c2ttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTExMTc4MDAsImV4cCI6MjA2NjY5MzgwMH0.Uk4RXPnrQq5wagaBzfPGH3Tf5qexktRIbHs0ovfXWxE');
+    const supabase = createClient(
+      'https://lvobywbpmssawuukzskm.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2b2J5d2JwbXNzYXd1dWt6c2ttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTExMTc4MDAsImV4cCI6MjA2NjY5MzgwMH0.Uk4RXPnrQq5wagaBzfPGH3Tf5qexktRIbHs0ovfXWxE'
+    );
+
+    // Login/logout logic
     const session = await supabase.auth.getSession();
     const navList = document.querySelector('nav ul');
     const loginItem = navList.querySelector('li:last-child');
@@ -24,6 +28,68 @@
     } else {
       loginItem.innerHTML = '<a href="login.html">Login</a>';
     }
+
+    // Load profile data
+    async function loadProfileData() {
+      const { data, error } = await supabase.from('profile_data').select('*').limit(1).single();
+      if (error) {
+        console.error('Gagal memuat data profil:', error.message);
+        return;
+      }
+
+      document.getElementById('profile-img').src = data.photo_url || 'https://via.placeholder.com/150';
+      document.getElementById('bio-text').textContent = data.biodata || '';
+
+      const skillList = document.getElementById('skill-list');
+      skillList.innerHTML = '';
+      data.skills?.forEach(skill => {
+        const li = document.createElement('li');
+        li.textContent = skill;
+        skillList.appendChild(li);
+      });
+
+      document.getElementById('experience-timeline').innerHTML = data.experience || '';
+      document.getElementById('organization-timeline').innerHTML = data.organization || '';
+      document.getElementById('activity-timeline').innerHTML = data.activity || '';
+
+      const educationList = document.getElementById('education-list');
+      educationList.innerHTML = '';
+      data.education?.forEach(edu => {
+        const li = document.createElement('li');
+        li.textContent = edu;
+        educationList.appendChild(li);
+      });
+
+      const projectList = document.getElementById('project-list');
+      projectList.innerHTML = '';
+      data.projects?.forEach(proj => {
+        const li = document.createElement('li');
+        li.textContent = proj;
+        projectList.appendChild(li);
+      });
+    }
+
+    // Load articles
+    async function loadArticles() {
+      const { data: articles, error } = await supabase.from('articles').select('*');
+      const container = document.getElementById('article-list');
+      container.innerHTML = '';
+      articles.forEach(article => {
+        container.innerHTML += `
+          <div class="article-card">
+            <img src="${article.image_url || 'https://via.placeholder.com/400x200'}" alt="Gambar Artikel" />
+            <h3>${article.title}</h3>
+            <p>${article.content}</p>
+          </div>
+        `;
+      });
+    }
+
+    // Jalankan setelah halaman dimuat
+    window.addEventListener('DOMContentLoaded', () => {
+      loadProfileData();
+      loadArticles();
+    });
   </script>
 </head>
 <body>
@@ -48,7 +114,6 @@
   </header>
 
   <main class="container">
-    <!-- Tambahkan di dalam <body> -->
     <section id="biodata" class="section">
       <h2>Biodata Singkat</h2>
       <img id="profile-img" src="https://via.placeholder.com/150" alt="Foto Profil" style="border-radius: 100px; width: 150px;" />
@@ -85,33 +150,9 @@
       <ul id="project-list"></ul>
     </section>
 
-
     <section id="articles" class="section">
       <h2>Artikel Terkait Proyek</h2>
       <div id="article-list"></div>
-      <script>
-        async function loadArticles() {
-          const { data: articles, error } = await supabase.from('articles').select('*');
-          const container = document.getElementById('article-list');
-          container.innerHTML = '';
-      
-          articles.forEach(article => {
-            container.innerHTML += `
-              <div class="article-card">
-                <img src="${article.image_url || 'https://via.placeholder.com/400x200'}" alt="Gambar Artikel" />
-                <h3>${article.title}</h3>
-                <p>${article.content}</p>
-              </div>
-            `;
-          });
-        }
-      
-        loadArticles();
-      </script>
-      <script type="module">
-        import { loadProfileData } from './profile-load.js';
-        loadProfileData();
-      </script>      
     </section>
 
     <section id="contact" class="section">
@@ -122,23 +163,16 @@
       <form id="contact-form">
         <label for="name">Nama</label>
         <input type="text" id="name" name="name" required>
-      
         <label for="email">Email</label>
         <input type="email" id="email" name="email" required>
-      
         <label for="message">Pesan</label>
         <textarea id="message" name="message" rows="4" required></textarea>
-      
         <button type="submit">Kirim</button>
       </form>
-      
     </section>
+
     <script type="module" src="./contact-submit.js"></script>
     <script type="module" src="./load-articles.js"></script>
-    <script type="module" src="./load-profile.js">
-      import { loadProfileData } from './load-profile.js';
-      loadProfileData();
-    </script>
   </main>
 </body>
 </html>
