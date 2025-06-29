@@ -84,11 +84,7 @@ async function loadContacts() {
 
   contacts.forEach(item => {
     const row = document.createElement('tr');
-    row.innerHTML = `
-      <td>${item.name}</td>
-      <td>${item.email}</td>
-      <td>${item.message}</td>
-    `;
+    row.innerHTML = `<td>${item.name}</td><td>${item.email}</td><td>${item.message}</td>`;
     tableBody.appendChild(row);
   });
 }
@@ -97,6 +93,8 @@ async function loadContacts() {
 if (window.location.pathname.includes('admin.html')) {
   loadContacts();
 }
+else {
+  loadContacts();
+}
 
-
-loadContacts();
+//loadContacts();
