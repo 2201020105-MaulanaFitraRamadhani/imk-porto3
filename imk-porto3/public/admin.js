@@ -17,12 +17,17 @@ profileForm.addEventListener('submit', async (e) => {
     projects: formData.get('projects').split(',').map(p => p.trim()),
   };
 
+  // Pakai upsert yang valid TANPA on_conflict di URL
   const { error } = await supabase
     .from('profile_data')
-    .upsert(profileData, { onConflict: ['id'] });
-    
-  if (error) alert('Gagal menyimpan profil');
-  else alert('Profil berhasil disimpan');
+    .upsert(profileData); // onConflict diatur otomatis oleh Supabase melalui primary key
+
+  if (error) {
+    console.error('Gagal menyimpan profil:', error);
+    alert('❌ Gagal menyimpan profil. Silakan periksa console.');
+  } else {
+    alert('✅ Profil berhasil disimpan');
+  }
 });
 
 // === ARTICLE SECTION ===
@@ -38,6 +43,8 @@ async function loadArticles() {
         <button onclick="fillArticleForm('${article.id}', \`${article.title}\`, \`${article.content}\`, '${article.image_url}')">Edit</button>
       </div>
     `).join('');
+  } else {
+    console.error('Gagal memuat artikel:', error);
   }
 }
 
@@ -72,7 +79,7 @@ async function loadContacts() {
     .from('contacts')
     .select('*')
     .order('created_at', { ascending: false });
-    
+
   if (data) {
     const tbody = document.querySelector('#contact-table tbody');
     tbody.innerHTML = data.map(c => `
@@ -83,8 +90,11 @@ async function loadContacts() {
         <td>${new Date(c.created_at).toLocaleString()}</td>
       </tr>
     `).join('');
+  } else {
+    console.error('Gagal memuat kontak:', error);
   }
 }
 
+// Inisialisasi saat halaman dimuat
 loadArticles();
 loadContacts();
