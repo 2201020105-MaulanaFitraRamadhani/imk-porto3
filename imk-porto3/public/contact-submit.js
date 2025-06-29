@@ -20,7 +20,7 @@ const { data, error } = await supabase
         
 
 if (error) {
-    alert('Gagal mengirim pesan.',error.message, error.details);
+    alert('Gagal mengirim pesan.');
     console.error('Supabase error:', error.message, error.details, error);
   } else {
     alert('Pesan berhasil dikirim!');
