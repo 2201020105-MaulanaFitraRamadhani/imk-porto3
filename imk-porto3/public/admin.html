@@ -71,33 +71,33 @@
     </section>
   </div>
   
-  <script src="./supabase-client.js"></script>
-  <script src="./admin.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-  const supabase = supabase.createClient(
-    'https://lvobywbpmssawuukzskm.supabase.co',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2b2J5d2JwbXNzYXd1dWt6c2ttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTExMTc4MDAsImV4cCI6MjA2NjY5MzgwMH0.Uk4RXPnrQq5wagaBzfPGH3Tf5qexktRIbHs0ovfXWxE'
-  );
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./supabase-client.js"></script>
+    <script src="./admin.js"></script>
+    <script>
+    const supabase = supabase.createClient(
+      'https://lvobywbpmssawuukzskm.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2b2J5d2JwbXNzYXd1dWt6c2ttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTExMTc4MDAsImV4cCI6MjA2NjY5MzgwMH0.Uk4RXPnrQq5wagaBzfPGH3Tf5qexktRIbHs0ovfXWxE'
+    );
 
-  async function loadContacts() {
-    const { data, error } = await supabase
-      .from('contacts')
-      .select('*');
+    async function loadContacts() {
+      const { data, error } = await supabase
+        .from('contacts')
+        .select('*');
 
-    if (error) {
-      document.getElementById('contacts-output').innerText = 'Gagal mengambil data: ' + error.message;
-      return;
+      if (error) {
+        document.getElementById('contacts-output').innerText = 'Gagal mengambil data: ' + error.message;
+        return;
+      }
+
+      if (data.length === 0) {
+        document.getElementById('contacts-output').innerText = 'Tidak ada data kontak.';
+        return;
+      }
+
+      document.getElementById('contacts-output').innerText = JSON.stringify(data, null, 2);
     }
-
-    if (data.length === 0) {
-      document.getElementById('contacts-output').innerText = 'Tidak ada data kontak.';
-      return;
-    }
-
-    document.getElementById('contacts-output').innerText = JSON.stringify(data, null, 2);
-  }
-</script>
+  </script>
 </body>
 
 </body>
