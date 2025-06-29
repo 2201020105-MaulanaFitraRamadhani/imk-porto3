@@ -37,8 +37,8 @@ body {
   align-items: center;
   flex-wrap: wrap; /* Allow wrapping on smaller screens */
   gap: 1rem;
-  /* Menyesuaikan posisi logo di tengah */
-  flex-direction: column; /* Default ke column untuk sentralisasi logo di atas */
+  /* Default ke column untuk sentralisasi logo di atas pada mobile */
+  flex-direction: column;
 }
 
 .navbar .logo {
@@ -81,42 +81,90 @@ body {
   background-color: #2980b9; /* Warna yang lebih gelap saat ditekan */
 }
 
+/* Dropdown specific styles */
+.dropdown {
+  position: relative;
+  display: inline-block; /* Agar dropdown muncul di samping item lain */
+}
+
+.dropbtn {
+  cursor: pointer;
+  /* Styling sama seperti nav-links li a */
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease;
+  font-weight: 600;
+  display: block;
+}
+
+.dropdown-content {
+  display: none; /* Sembunyikan secara default */
+  position: absolute;
+  background-color: #34495e; /* Warna latar belakang dropdown */
+  min-width: 180px; /* Lebar minimum dropdown */
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1; /* Pastikan di atas konten lain */
+  border-radius: 5px;
+  overflow: hidden; /* Pastikan sudut membulat diterapkan */
+  left: 0; /* Posisikan ke kiri parent */
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block; /* Setiap item link akan mengisi lebar penuh */
+  text-align: left; /* Teks rata kiri */
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-content a:hover {
+  background-color: #2c3e50; /* Warna hover untuk item dropdown */
+  transform: none; /* Jangan ada efek lift di dropdown items */
+}
+
+.dropdown:hover .dropdown-content {
+  display: block; /* Tampilkan dropdown saat hover pada parent .dropdown */
+}
+
 /* Hero Section */
 .hero-section {
   text-align: center;
-  padding: 4rem 2rem; /* More vertical padding */
-  background: linear-gradient to bottom right, #3498db, #2c3e50; /* Gradient background */
+  padding: 4rem 2rem;
+  background: linear-gradient to bottom right, #3498db, #2c3e50;
   color: white;
   border-radius: 8px;
-  margin-top: 2rem; /* Space from navbar */
+  margin-top: 2rem;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .hero-profile {
   display: flex;
-  flex-direction: column; /* Stack on smaller screens */
+  flex-direction: column;
   align-items: center;
   gap: 1.5rem;
 }
 
 .profile-image {
-  width: 180px; /* Larger profile image */
+  width: 180px;
   height: 180px;
   object-fit: cover;
   border-radius: 50%;
-  border: 5px solid white; /* White border */
+  border: 5px solid white;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .hero-title {
-  font-size: 2.8rem; /* Larger title */
+  font-size: 2.8rem;
   margin-bottom: 0.8rem;
   font-weight: 800;
   letter-spacing: -0.5px;
 }
 
 .hero-bio {
-  font-size: 1.2rem; /* Larger bio text */
+  font-size: 1.2rem;
   max-width: 700px;
   margin: 0 auto;
   opacity: 0.9;
@@ -126,9 +174,9 @@ body {
 .section {
   margin-top: 3rem;
   background-color: white;
-  padding: 2.5rem; /* Increased padding */
-  border-radius: 10px; /* More rounded corners */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Stronger shadow */
+  padding: 2.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -138,13 +186,13 @@ body {
 }
 
 .section h2 {
-  font-size: 2rem; /* Larger section titles */
+  font-size: 2rem;
   color: #2c3e50;
   margin-bottom: 1.5rem;
-  border-bottom: 3px solid #3498db; /* Blue underline */
+  border-bottom: 3px solid #3498db;
   padding-bottom: 0.8rem;
   font-weight: 700;
-  text-align: center; /* Center section titles */
+  text-align: center;
 }
 
 /* Skill Set */
@@ -152,16 +200,16 @@ body {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem; /* Space between tags */
-  justify-content: center; /* Center skill tags */
+  gap: 0.75rem;
+  justify-content: center;
   margin-top: 1.5rem;
 }
 
 .skill-tags li {
-  background-color: #ecf0f1; /* Light background for tags */
+  background-color: #ecf0f1;
   color: #34495e;
-  padding: 0.6rem 1.2rem; /* More padding */
-  border-radius: 25px; /* Pill shape */
+  padding: 0.6rem 1.2rem;
+  border-radius: 25px;
   font-size: 0.95rem;
   font-weight: 600;
   transition: background-color 0.3s ease, transform 0.2s ease;
@@ -178,40 +226,40 @@ body {
 .timeline {
   margin-top: 2rem;
   position: relative;
-  padding-left: 25px; /* Space for the timeline line and circles */
+  padding-left: 25px;
 }
 
 .timeline::before {
   content: '';
   position: absolute;
-  left: 10px; /* Position the line */
+  left: 10px;
   top: 0;
   bottom: 0;
   width: 3px;
-  background-color: #bdc3c7; /* Light grey timeline line */
+  background-color: #bdc3c7;
 }
 
 .timeline-item {
   position: relative;
-  margin-bottom: 2rem; /* Space between items */
-  padding: 0.5rem 0 0.5rem 25px; /* Padding for content */
+  margin-bottom: 2rem;
+  padding: 0.5rem 0 0.5rem 25px;
 }
 
 .timeline-item::before {
   content: '';
   position: absolute;
-  left: 0px; /* Position of the circle */
-  top: 8px; /* Vertically center the circle */
+  left: 0px;
+  top: 8px;
   width: 14px;
   height: 14px;
-  background-color: #3498db; /* Blue circles */
+  background-color: #3498db;
   border-radius: 50%;
-  border: 3px solid white; /* White border around circle */
+  border: 3px solid white;
   z-index: 1;
 }
 
 .timeline-item h4 {
-  font-size: 1.15rem; /* Larger title in timeline */
+  font-size: 1.15rem;
   color: #2c3e50;
   margin-bottom: 0.4rem;
   font-weight: 700;
@@ -224,13 +272,13 @@ body {
 
 .timeline-list li {
   margin-bottom: 0.8rem;
-  list-style: none; /* Remove default list style */
+  list-style: none;
   position: relative;
   padding-left: 20px;
 }
 
 .timeline-list li::before {
-  content: '•'; /* Custom bullet point */
+  content: '•';
   color: #3498db;
   font-size: 1.2em;
   position: absolute;
@@ -242,7 +290,7 @@ body {
 .project-grid {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
   margin-top: 1.5rem;
 }
@@ -271,28 +319,28 @@ body {
 .article-card {
   background-color: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.08); /* Slightly stronger shadow */
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  animation: fadeInUp 0.6s ease forwards; /* Slightly slower animation */
+  animation: fadeInUp 0.6s ease forwards;
   display: flex;
   flex-direction: column;
 }
 
 .article-card:hover {
-  transform: translateY(-8px); /* More pronounced lift */
-  box-shadow: 0 8px 18px rgba(0,0,0,0.15); /* Stronger hover shadow */
+  transform: translateY(-8px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
 }
 
 .article-card img {
   width: 100%;
-  height: 180px; /* Slightly taller images */
+  height: 180px;
   object-fit: cover;
   border-bottom: 1px solid #eee;
 }
 
 .article-card h3 {
-  font-size: 1.35rem; /* Larger title */
+  font-size: 1.35rem;
   margin: 1rem 1rem 0.6rem;
   color: #2c3e50;
   line-height: 1.3;
@@ -302,13 +350,13 @@ body {
   font-size: 0.9rem;
   color: #666;
   margin: 0 1rem 1.2rem;
-  flex-grow: 1; /* Allow content to grow */
+  flex-grow: 1;
 }
 
 @keyframes fadeInUp {
   from {
       opacity: 0;
-      transform: translateY(30px); /* Larger initial translateY */
+      transform: translateY(30px);
   }
   to {
       opacity: 1;
@@ -332,26 +380,26 @@ body {
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem; /* Increased gap between form elements */
+  gap: 1rem;
 }
 
 .contact-form label {
   font-weight: 700;
   color: #333;
   margin-bottom: 0.2rem;
-  display: block; /* Ensure label takes its own line */
+  display: block;
 }
 
 .contact-form input[type="text"],
 .contact-form input[type="email"],
 .contact-form textarea {
-  padding: 0.8rem 1rem; /* More padding */
+  padding: 0.8rem 1rem;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-family: inherit;
   font-size: 1rem;
-  width: 100%; /* Full width */
-  max-width: 500px; /* Limit max width for inputs */
+  width: 100%;
+  max-width: 500px;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -360,19 +408,19 @@ body {
 .contact-form textarea:focus {
   outline: none;
   border-color: #3498db;
-  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.25); /* Blue glow on focus */
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.25);
 }
 
 .contact-form textarea {
-  min-height: 120px; /* Minimum height for textarea */
+  min-height: 120px;
   resize: vertical;
 }
 
 .contact-form button {
-  align-self: flex-start; /* Align button to the start */
-  background-color: #3498db; /* Blue button */
+  align-self: flex-start;
+  background-color: #3498db;
   color: white;
-  padding: 0.9rem 2rem; /* More padding */
+  padding: 0.9rem 2rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -383,7 +431,7 @@ body {
 }
 
 .contact-form button:hover {
-  background-color: #2980b9; /* Darker blue on hover */
+  background-color: #2980b9;
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -399,18 +447,18 @@ body {
 }
 
 /* Responsive Adjustments */
-@media (min-width: 769px) { /* Untuk layar yang lebih besar dari 768px */
+@media (min-width: 769px) {
   .navbar-content {
-      flex-direction: row; /* Kembali ke tata letak baris */
+      flex-direction: row;
   }
 
   .navbar .logo {
-      width: auto; /* Otomatis lebar */
-      margin-bottom: 0; /* Hapus margin bawah */
+      width: auto;
+      margin-bottom: 0;
   }
 
   .nav-links {
-      width: auto; /* Otomatis lebar */
+      width: auto;
   }
 }
 
@@ -424,6 +472,33 @@ body {
       flex-direction: column;
       gap: 0.8rem;
       margin-top: 1rem;
+  }
+
+  /* Untuk mobile, dropdown akan ditampilkan sebagai list biasa */
+  .dropdown .dropbtn {
+      width: 100%; /* Memastikan tombol dropdown mengisi lebar penuh */
+      text-align: center;
+      margin-bottom: 0.5rem;
+  }
+
+  .dropdown-content {
+      position: static; /* Hilangkan posisi absolut agar mengalir normal */
+      display: block; /* Selalu tampilkan di mobile */
+      box-shadow: none;
+      background-color: transparent; /* Hilangkan latar belakang dropdown */
+      min-width: unset;
+      text-align: center; /* Teks di tengah untuk mobile */
+  }
+
+  .dropdown-content a {
+      padding: 8px 16px;
+      background-color: #374151; /* Warna latar belakang untuk item dropdown di mobile */
+      margin-bottom: 5px; /* Jarak antar item */
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+  }
+  .dropdown-content a:hover {
+      background-color: #4b5563;
   }
 
   .hero-title {
@@ -456,13 +531,13 @@ body {
   }
 
   .article-grid {
-      grid-template-columns: 1fr; /* Single column on small screens */
+      grid-template-columns: 1fr;
   }
 
   .contact-form input[type="text"],
   .contact-form input[type="email"],
   .contact-form textarea {
-      max-width: 100%; /* Ensure full width on small screens */
+      max-width: 100%;
   }
 }
 

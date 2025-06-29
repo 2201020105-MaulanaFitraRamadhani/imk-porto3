@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portofolio Pribadi</title>
+  <title>MauPorto</title>
   <link rel="stylesheet" href="style.css"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -12,13 +12,14 @@
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
     const supabase = createClient(
       'https://lvobywbpmssawuukzskm.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2b2J5d2JwbXNzYXd1dWt6c2ttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTExMTc4MDAsImV4cCI6MjA2NjY5MzgwMH0.Uk4RXPnrQq5wagaBzfPGH3Tf5qexktRIbHs0ovfXWxE'
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2b2J5d2JwbXNzYXd1dWt6c2ttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTExMTc4MDAsImV4cCI6MjA2NjY5MzgwMH0.Uk4RXPnrQq5wagaBzbPGH3Tf5qexktRIbHs0ovfXWxE'
     );
 
     // Login/logout logic
     const session = await supabase.auth.getSession();
     const navList = document.querySelector('nav ul');
-    const loginItem = navList.querySelector('li:last-child');
+    // Cari elemen login menggunakan id atau kelas jika ada, atau pastikan selektornya unik
+    const loginItem = navList.querySelector('.nav-login-item'); // Menggunakan kelas baru
     if (session.data.session) {
       loginItem.innerHTML = '<a href="#" id="logout-link">Logout</a>';
       document.getElementById('logout-link').addEventListener('click', async () => {
@@ -95,19 +96,24 @@
 <body>
   <header class="navbar">
     <div class="container navbar-content">
-      <h1 class="logo">Portofolio</h1>
+      <h1 class="logo">MauPorto</h1>
       <nav>
         <ul class="nav-links">
-          <li><a href="#biodata">Biodata</a></li>
-          <li><a href="#skills">Skill</a></li>
-          <li><a href="#experience">Pengalaman</a></li>
-          <li><a href="#organization">Organisasi</a></li>
-          <li><a href="#activity">Aktifitas</a></li>
-          <li><a href="#education">Pendidikan</a></li>
-          <li><a href="#projects">Proyek</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropbtn">Tentang Saya &#9662;</a>
+            <div class="dropdown-content">
+              <a href="#biodata">Biodata</a>
+              <a href="#skills">Skill</a>
+              <a href="#experience">Pengalaman</a>
+              <a href="#organization">Organisasi</a>
+              <a href="#activity">Aktifitas</a>
+              <a href="#education">Pendidikan</a>
+              <a href="#projects">Proyek</a>
+            </div>
+          </li>
           <li><a href="#articles">Artikel</a></li>
           <li><a href="#contact">Kontak</a></li>
-          <li><a href="login.html">Login</a></li>
+          <li class="nav-login-item"><a href="login.html">Login</a></li>
         </ul>
       </nav>
     </div>
@@ -118,10 +124,14 @@
       <div class="hero-profile">
         <img id="profile-img" src="https://via.placeholder.com/150" alt="Foto Profil" class="profile-image"/>
         <div class="hero-text">
-          <h2 class="hero-title">Halo, Saya [Nama Anda]</h2>
-          <p id="bio-text" class="hero-bio">Memuat biodata...</p>
+          <h2 id="bio-text" class="hero-title">Halo, Saya [Nama Anda]</h2>
         </div>
       </div>
+    </section>
+
+    <section id="biodata" class="section">
+      <h2>Biodata Singkat</h2>
+      <p id="bio-text">Memuat biodata...</p>
     </section>
 
     <section id="skills" class="section">
@@ -162,8 +172,8 @@
     <section id="contact" class="section">
       <h2>Hubungi Saya</h2>
       <div class="contact-info">
-        <p><strong>Email:</strong> kamu@email.com</p>
-        <p><strong>Instagram:</strong> @kamu</p>
+        <p><strong>Email:</strong> maulanatkj2019@gmail.com</p>
+        <p><strong>Instagram:</strong> @maumauig</p>
         <p><strong>Biaya Layanan:</strong> Mulai dari Rp500.000 / proyek</p>
       </div>
       <form id="contact-form" class="contact-form">
@@ -182,7 +192,7 @@
   </main>
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2025 Portofolio Pribadi. Hak Cipta Dilindungi.</p>
+      <p>&copy; 2025 MauPorto By Maulana Fitra Ramadhani</p>
     </div>
   </footer>
 </body>
