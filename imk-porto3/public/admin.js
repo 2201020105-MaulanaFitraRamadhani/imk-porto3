@@ -69,6 +69,7 @@ document.getElementById('article-form').addEventListener('submit', async (e) => 
 
 // === Tampilkan Data dari Tabel Kontak ===
 // Tampilkan kontak dari tabel 'contacts'
+/*
 async function loadContactsRaw() {
   const { data, error } = await supabase.from('contacts').select('*');
   if (error) {
@@ -78,7 +79,7 @@ async function loadContactsRaw() {
   console.log('Data kontak:', data); // Atau tampilkan di HTML
   document.getElementById("raw-output").innerText = JSON.stringify(data, null, 2);
 }
-
+*/
 
 // Jangan dibatasi if() supaya bisa dipanggil dari <button onclick="...">
 
