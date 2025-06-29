@@ -67,4 +67,31 @@ document.getElementById('article-form').addEventListener('submit', async (e) => 
   }
 });
 
+// === Tampilkan Data dari Tabel Kontak ===
+async function loadContacts() {
+  const tableBody = document.querySelector('#contact-table tbody');
+  const { data, error } = await supabase.from('contacts').select('*').order('created_at', { ascending: false });
 
+  if (error) {
+    tableBody.innerHTML = `<tr><td colspan="4">Gagal memuat data</td></tr>`;
+    return;
+  }
+
+  if (data.length === 0) {
+    tableBody.innerHTML = `<tr><td colspan="4">Belum ada pesan</td></tr>`;
+    return;
+  }
+
+  tableBody.innerHTML = '';
+  data.forEach(msg => {
+    const row = `<tr>
+      <td>${msg.name}</td>
+      <td>${msg.email}</td>
+      <td>${msg.message}</td>
+      <td>${new Date(msg.created_at).toLocaleString()}</td>
+    </tr>`;
+    tableBody.innerHTML += row;
+  });
+}
+
+loadContacts();
