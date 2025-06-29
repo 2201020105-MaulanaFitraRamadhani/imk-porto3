@@ -15,6 +15,6 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
   if (error) {
     alert('Login gagal: ' + error.message);
   } else {
-    window.location.href = 'input.html';
+    window.location.href = 'admin.html';
   }
 });
