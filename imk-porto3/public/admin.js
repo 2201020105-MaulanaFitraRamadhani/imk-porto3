@@ -69,32 +69,26 @@ document.getElementById('article-form').addEventListener('submit', async (e) => 
 
 // === Tampilkan Data dari Tabel Kontak ===
 // Tampilkan kontak dari tabel 'contacts'
-async function loadContacts() {
+async function loadContactsRaw() {
   const { data: contacts, error } = await supabase
     .from('contacts')
     .select('*');
 
+  const output = document.getElementById('raw-contact-output');
+
   if (error) {
-    console.error('Gagal mengambil kontak:', error);
+    output.textContent = 'Gagal mengambil data: ' + JSON.stringify(error, null, 2);
+    console.error(error);
     return;
   }
 
-  const tableBody = document.getElementById('contact-table-body');
-  tableBody.innerHTML = '';
-
-  contacts.forEach(item => {
-    const row = document.createElement('tr');
-    row.innerHTML = `<td>${item.name}</td><td>${item.email}</td><td>${item.message}</td>`;
-    tableBody.appendChild(row);
-  });
+  // Tampilkan data mentah sebagai string JSON
+  output.textContent = JSON.stringify(contacts, null, 2);
 }
 
-// Pastikan dipanggil saat berada di halaman admin
 if (window.location.pathname.includes('admin.html')) {
-  loadContacts();
+  loadContactsRaw();
 }
-else {
-  loadContacts();
-}
+
 
 //loadContacts();
