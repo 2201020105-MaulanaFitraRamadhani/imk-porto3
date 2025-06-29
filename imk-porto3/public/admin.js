@@ -68,40 +68,32 @@ document.getElementById('article-form').addEventListener('submit', async (e) => 
 });
 
 // === Tampilkan Data dari Tabel Kontak ===
-// Tampilkan kontak
+// Tampilkan kontak dari tabel 'contacts'
 async function loadContacts() {
-  try {
-    const { data, error } = await supabase.from('contacts').select('*').order('created_at', { ascending: false });
-    console.log("Data dari Supabase:", data);
-    console.log("Error (jika ada):", error);
+  const { data, error } = await supabase.from('contacts').select('*');
+  if (error) {
+    console.error('Gagal mengambil kontak:', error);
+    return;
+  }
 
-    const tableBody = document.getElementById('contact-table-body');
-    tableBody.innerHTML = '';
+  const tableBody = document.getElementById('contact-table-body');
+  tableBody.innerHTML = '';
 
-    if (error) {
-      tableBody.innerHTML = '<tr><td colspan="3">Gagal mengambil data</td></tr>';
-      return;
-    }
-
-    if (!data || data.length === 0) {
-      tableBody.innerHTML = '<tr><td colspan="3">Belum ada pesan</td></tr>';
-      return;
-    }
-
-    data.forEach(item => {
-      const row = `<tr>
+  data.forEach(item => {
+    const row = `
+      <tr>
         <td>${item.name || '-'}</td>
         <td>${item.email || '-'}</td>
         <td>${item.message || '-'}</td>
       </tr>`;
-      tableBody.innerHTML += row;
-    });
-  } catch (e) {
-    console.error("Kesalahan fatal:", e);
-    const tableBody = document.getElementById('contact-table-body');
-    tableBody.innerHTML = '<tr><td colspan="3">Terjadi kesalahan saat memuat data</td></tr>';
-  }
+    tableBody.innerHTML += row;
+  });
 }
 
+// Panggil fungsi jika berada di halaman admin.html
+if (window.location.pathname.includes('admin.html')) {
+  loadProfileData();
+  loadContacts(); // panggil di sini juga
+}
 
-loadContacts();
+// loadContacts();
