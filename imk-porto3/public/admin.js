@@ -82,13 +82,11 @@ async function loadContactsRaw() {
     return;
   }
 
-  // Tampilkan data mentah sebagai string JSON
   output.textContent = JSON.stringify(contacts, null, 2);
 }
 
-if (window.location.pathname.includes('admin.html')) {
-  loadContactsRaw();
-}
+// Jangan dibatasi if() supaya bisa dipanggil dari <button onclick="...">
+
 
 
 //loadContacts();
