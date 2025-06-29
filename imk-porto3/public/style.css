@@ -24,7 +24,7 @@ body {
 .navbar {
   background-color: #2c3e50; /* Darker, more sophisticated blue */
   color: white;
-  padding: 1rem 0;
+  padding: 0.8rem 0; /* Mengurangi padding vertikal untuk navbar yang lebih kecil */
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15); /* More prominent shadow */
   position: sticky; /* Make navbar sticky */
   top: 0;
@@ -37,12 +37,17 @@ body {
   align-items: center;
   flex-wrap: wrap; /* Allow wrapping on smaller screens */
   gap: 1rem;
+  /* Menyesuaikan posisi logo di tengah */
+  flex-direction: column; /* Default ke column untuk sentralisasi logo di atas */
 }
 
 .navbar .logo {
   font-size: 1.8rem; /* Larger logo */
   font-weight: 800;
   color: #ecf0f1; /* Lighter color for logo */
+  text-align: center; /* Memastikan teks logo di tengah */
+  width: 100%; /* Memastikan logo mengambil lebar penuh untuk sentralisasi */
+  margin-bottom: 0.5rem; /* Memberi sedikit ruang di bawah logo */
 }
 
 .nav-links {
@@ -51,6 +56,8 @@ body {
   gap: 1.2rem; /* Increased gap */
   list-style: none;
   margin: 0; /* Reset margin */
+  justify-content: center; /* Memastikan link navigasi di tengah */
+  width: 100%; /* Memastikan daftar link mengambil lebar penuh */
 }
 
 .nav-links li a {
@@ -58,13 +65,20 @@ body {
   text-decoration: none;
   padding: 0.5rem 1rem; /* More padding */
   border-radius: 5px;
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Added transform transition */
+  transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease; /* Menambahkan transisi untuk warna dan background */
   font-weight: 600; /* Bolder navigation links */
+  display: block; /* Memastikan area klik lebih besar */
 }
 
 .nav-links li a:hover {
   background-color: #34495e; /* Slightly darker hover */
   transform: translateY(-2px); /* Slight lift on hover */
+  color: #f8f8f8; /* Sedikit perubahan warna teks saat hover */
+}
+
+.nav-links li a:active {
+  transform: translateY(0); /* Mengembalikan posisi saat ditekan */
+  background-color: #2980b9; /* Warna yang lebih gelap saat ditekan */
 }
 
 /* Hero Section */
@@ -385,6 +399,21 @@ body {
 }
 
 /* Responsive Adjustments */
+@media (min-width: 769px) { /* Untuk layar yang lebih besar dari 768px */
+  .navbar-content {
+      flex-direction: row; /* Kembali ke tata letak baris */
+  }
+
+  .navbar .logo {
+      width: auto; /* Otomatis lebar */
+      margin-bottom: 0; /* Hapus margin bawah */
+  }
+
+  .nav-links {
+      width: auto; /* Otomatis lebar */
+  }
+}
+
 @media (max-width: 768px) {
   .navbar-content {
       flex-direction: column;
