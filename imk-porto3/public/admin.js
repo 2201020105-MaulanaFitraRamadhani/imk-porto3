@@ -68,30 +68,28 @@ document.getElementById('article-form').addEventListener('submit', async (e) => 
 });
 
 // === Tampilkan Data dari Tabel Kontak ===
+// Tampilkan kontak
 async function loadContacts() {
-  const tableBody = document.querySelector('#contact-table tbody');
   const { data, error } = await supabase.from('contacts').select('*').order('created_at', { ascending: false });
+  if (error) return console.error('Gagal mengambil kontak:', error);
 
-  if (error) {
-    tableBody.innerHTML = `<tr><td colspan="4">Gagal memuat data</td></tr>`;
-    return;
-  }
-
-  if (data.length === 0) {
-    tableBody.innerHTML = `<tr><td colspan="4">Belum ada pesan</td></tr>`;
-    return;
-  }
-
+  const tableBody = document.getElementById('contact-table-body');
   tableBody.innerHTML = '';
-  data.forEach(msg => {
+
+  if (!data || data.length === 0) {
+    tableBody.innerHTML = '<tr><td colspan="3">Belum ada pesan</td></tr>';
+    return;
+  }
+
+  data.forEach(item => {
     const row = `<tr>
-      <td>${msg.name}</td>
-      <td>${msg.email}</td>
-      <td>${msg.message}</td>
-      <td>${new Date(msg.created_at).toLocaleString()}</td>
+      <td>${item.name}</td>
+      <td>${item.email}</td>
+      <td>${item.message}</td>
     </tr>`;
     tableBody.innerHTML += row;
   });
 }
+
 
 loadContacts();
