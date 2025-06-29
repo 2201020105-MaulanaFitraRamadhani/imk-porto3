@@ -19,11 +19,12 @@ const { data, error } = await supabase
 .select()
         
 
-  if (error) {
+if (error) {
     alert('Gagal mengirim pesan.');
-    console.error(error);
+    console.error('Supabase error:', error.message, error.details, error);
   } else {
     alert('Pesan berhasil dikirim!');
     this.reset();
   }
+  
 });
