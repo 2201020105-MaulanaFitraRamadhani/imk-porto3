@@ -1,5 +1,5 @@
 // js/load-articles.js
-import { supabase } from './supabase-client.js';
+//import { supabase } from './supabase-client.js';
 
 async function fetchArticles() {
   const { data, error } = await supabase
